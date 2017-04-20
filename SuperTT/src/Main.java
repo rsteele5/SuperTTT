@@ -6,7 +6,7 @@ public class Main
   public static void main(String[] args)
   {
     //JFrame frame = new Title();
-    JFrame frame = new myTicTacToe();
+    JFrame frame = new Gameboard();
     frame.setTitle("GUI Test");
     frame.setLocation(400, 100);
     frame.setSize(500,500);

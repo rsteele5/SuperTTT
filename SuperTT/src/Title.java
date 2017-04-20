@@ -28,7 +28,7 @@ public class Title extends JFrame {
             buttonPanel.add(multi);
             c.add(buttonPanel, "Center");
             
-        /*
+            /*
             Add button listener stuff and make it work and stuff. :)
             */
     }      
