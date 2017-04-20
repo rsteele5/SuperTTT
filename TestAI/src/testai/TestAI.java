@@ -23,6 +23,7 @@ public class TestAI {
         
         input = keyboard.next();
         while(input != "q"){
+            System.out.print("I move to: ");
             System.out.println(myAI.makeMove(input));
             input = keyboard.next();
         }

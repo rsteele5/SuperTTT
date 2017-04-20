@@ -48,7 +48,7 @@ public class AI {
     }
 
     private void countVerticle() {
-        int colCount = this.theirSpot;       
+        int colCount = this.theirSpot;     
 
         while(colCount >= 0){
             if(this.markedSpots[colCount] == this.myShape){//we hit our own shape so return
@@ -78,10 +78,11 @@ public class AI {
     }
 
     private void countHorizontal() {
-        int horCount = this.theirSpot;       
-
+        int horCount = this.theirSpot - 1;       
+        this.rowCount++;
+        
         while(horCount >= 0){
-            if(horCount == 5|| horCount == 10 || horCount == 15 || horCount == 20){
+            if(horCount == 4|| horCount == 9 || horCount == 14 || horCount == 19){
                 break;
             }
             else
@@ -237,10 +238,10 @@ public class AI {
 
     private void markRowSpot() {
         int rowCount = 0;
-        int rowSpot = this.theirSpot;
+        int rowSpot = this.theirSpot - 1;
         
         while(rowSpot >= 0){ //check the  if statement
-            if(rowSpot == -1 || rowSpot == 4 || rowSpot == 9 || rowSpot == 14 || rowSpot == 19 || rowSpot == 24)
+            if(rowSpot == 4 || rowSpot == 9 || rowSpot == 14 || rowSpot == 19 || rowSpot == 24)
                 break;
             else{
                 if(this.markedSpots[rowSpot] == this.myShape || this.markedSpots[rowSpot] == this.theirShape)
@@ -296,10 +297,13 @@ public class AI {
 
     private void drawGame() {
         for(int i = 0; i < 25; i++){
-            if(this.markedSpots[i] != this.theirShape || this.markedSpots[i] != this.myShape){
+            if(this.markedSpots[i] == this.theirShape || this.markedSpots[i] == this.myShape)//if there is a shape here skip it
+                this.rowCount++;
+            else{ //mark o and break
                 this.markedSpots[i] = this.myShape;
                 this.mySpot = Integer.toString(i);
-            }
+                return;
+            }            
         }
     }
 }
