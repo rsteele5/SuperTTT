@@ -14,4 +14,6 @@ public class Standalone extends GameManager
     {
         return true;
     }
+    
+    protected void gameOver(){}
 }

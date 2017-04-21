@@ -31,4 +31,5 @@ public abstract class GameManager
     }
     
     protected abstract void gameOver();
+    protected abstract int whoGoesFirst();
 }
