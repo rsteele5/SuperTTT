@@ -14,22 +14,17 @@ public abstract class GameManager
     protected boolean readyToSendMove = false;
     protected int CurrentMove = -1;
     
-    protected abstract boolean validateMove();
-    
     protected void runGame()
     {
-        /*
-        decide who goes first
+        this.whoGoesFirst();
         
-        loop until game is finshed
-        {
-            player move
-            if(move ends the game)
-                gameOver();
-        }
-        */
+        while(this.activeGame) {this.move();}
+        
+        this.gameOver();
     }
-    
+    protected abstract void whoGoesFirst();
+    protected abstract void move();
+    //validateMove() will be called inside of move()
+    protected abstract boolean validateMove();
     protected abstract void gameOver();
-    protected abstract int whoGoesFirst();
 }
