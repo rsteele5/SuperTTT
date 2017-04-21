@@ -4,15 +4,17 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Gameboard extends javax.swing.JFrame
+public class Gameboard extends JFrame
 {
 
 final JButton[] b = new JButton[25];
 final char[] cArray = new char[25];
 private final JTextField display;
+private static final JButton quit = new JButton("Quit");
 private char nextPlayer = 'O';
 private int unplayedCount = 25;
 
@@ -34,6 +36,12 @@ private int unplayedCount = 25;
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(5, 5));
 		cp.add(panel, "Center");
+                
+                
+                JPanel quitPanel = new JPanel();
+                quitPanel.add(quit);
+                cp.add(quitPanel,"South");
+
 		
                 //Initialize arr of 25 JButtons
                 //create buttons 0-24
@@ -55,6 +63,7 @@ private int unplayedCount = 25;
                 
                 //Add listeners to JButtons
                 Gameboard.ButtonListener listener = new Gameboard.ButtonListener();
+                quit.addActionListener(listener);
 		for(int i=0;i<25;i++){
                     b[i].addActionListener(listener);
 		}
@@ -70,6 +79,11 @@ private int unplayedCount = 25;
             if(ae.getSource() instanceof JButton){
                 ((JButton)ae.getSource()).setText("" + nextPlayer);
                 ((JButton)ae.getSource()).setEnabled(false);
+            }
+            
+            //if source is quit button, dispose of current JFrame
+            if(ae.getSource() == quit){
+                dispose();
             }
             
             //If game is done, disable all JButtons
