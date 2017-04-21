@@ -25,4 +25,7 @@ public class NetworkMode extends GameManager
         else{/*Move does not exist*/return false;}
         
     }
+    protected void gameOver(){
+    
+    }
 }
