@@ -25,4 +25,10 @@ public abstract class GameManager
         {
             player move
             if(move ends the game)
+                gameOver();
+        }
+        */
+    }
+    
+    protected abstract void gameOver();
 }
