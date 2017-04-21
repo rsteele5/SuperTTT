@@ -14,16 +14,10 @@ public abstract class GameManager
     protected boolean readyToSendMove = false;
     protected int CurrentMove = -1;
     
-    protected void runGame()
-    {
-        this.whoGoesFirst();
+    public void setCurrentMove(int num) {CurrentMove = num;}
         
-        while(this.activeGame) {this.move();}
-        
-        this.gameOver();
-    }
-    protected abstract void whoGoesFirst();
-    protected abstract void move();
+    public abstract int whoGoesFirst();
+    public abstract void playerMove();
     //validateMove() will be called inside of move()
     protected abstract boolean validateMove();
     protected abstract void gameOver();
