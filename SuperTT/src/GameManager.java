@@ -15,4 +15,14 @@ public abstract class GameManager
     int CurrentMove = -1;
     
     protected abstract boolean validateMove();
+    
+    protected void runGame()
+    {
+        /*
+        decide who goes first
+        
+        loop until game is finshed
+        {
+            player move
+            if(move ends the game)
 }

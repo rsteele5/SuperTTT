@@ -212,7 +212,6 @@ public class AI {
     }
 
     private void markColumnSpot() {
-        int colCount = 0;
         int colSpot = this.theirSpot;
         
         while(colSpot >= 0){
