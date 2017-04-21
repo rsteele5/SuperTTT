@@ -19,8 +19,8 @@ public class AI {
     private int backDiagSpots = 0;
     private int forwardDiagSpots = 0;
     
-    private String theirShape = "o";
-    private String myShape = "x";
+    private final String theirShape = "o";
+    private final String myShape = "x";
     private String mySpot;
     
     String makeMove(String recievedSpot){        
