@@ -10,9 +10,9 @@
  */
 public abstract class GameManager 
 {
-    boolean activeGame = true;
-    boolean readyToSendMove = false;
-    int CurrentMove = -1;
+    protected boolean activeGame = true;
+    protected boolean readyToSendMove = false;
+    protected int CurrentMove = -1;
     
     protected abstract boolean validateMove();
     
