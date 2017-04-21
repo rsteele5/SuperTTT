@@ -16,20 +16,8 @@ public abstract class GameManager
     
     protected abstract boolean validateMove();
     
-    protected void runGame()
-    {
-        /*
-        decide who goes first
-        
-        loop until game is finshed
-        {
-            player move
-            if(move ends the game)
-                gameOver();
-        }
-        */
-    }
+    
     
     protected abstract void gameOver();
-    protected abstract int whoGoesFirst();
+    public abstract int whoGoesFirst();
 }

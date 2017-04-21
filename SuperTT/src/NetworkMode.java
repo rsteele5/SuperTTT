@@ -28,4 +28,8 @@ public class NetworkMode extends GameManager
     protected void gameOver(){
     
     }
+    public int whoGoesFirst(){
+         return 1; 
+    }
+    
 }

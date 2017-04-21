@@ -12,11 +12,15 @@ public class Standalone extends GameManager
 {
     //standalone version enables a person to play against the game AI
     
-    //while game is active, make move again game AI
-    /*while(activeGame){
+    //Decide who goes first
+    //this.whoGoesFirst(); 
     
+    /*create an instance of an AI
+    AI myAI = new AI();
     
-    }
+    // while game is active, make move against game AI
+    this.playerMove(); 
+    
     */
     protected boolean validateMove()
     {
@@ -25,5 +29,17 @@ public class Standalone extends GameManager
     
     protected void gameOver(){
     
+    }
+    
+    public int whoGoesFirst(){
+        /*create random number from 0-100
+        
+        //assign random numbers to two int variables
+        
+        //compare the variables and see which one will go first...0 for human and 1 for AI
+        
+        */
+        
+        return 1; 
     }
 }
