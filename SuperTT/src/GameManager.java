@@ -10,25 +10,15 @@
  */
 public abstract class GameManager 
 {
-    boolean activeGame = true;
-    boolean readyToSendMove = false;
-    int CurrentMove = -1;
+    protected boolean activeGame = true;
+    protected boolean readyToSendMove = false;
+    protected int CurrentMove = -1;
     
-    protected abstract boolean validateMove();
-    
-    protected void runGame()
-    {
-        /*
-        decide who goes first
+    public void setCurrentMove(int num) {CurrentMove = num;}
         
-        loop until game is finshed
-        {
-            player move
-            if(move ends the game)
-                gameOver();
-        }
-        */
-    }
-    
+    public abstract int whoGoesFirst();
+    public abstract void playerMove();
+    //validateMove() will be called inside of move()
+    protected abstract boolean validateMove();
     protected abstract void gameOver();
 }

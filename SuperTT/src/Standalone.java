@@ -10,8 +10,20 @@
  */
 public class Standalone extends GameManager
 {
+    //standalone version enables a person to play against the game AI
+    
+    //while game is active, make move again game AI
+    /*while(activeGame){
+    
+    
+    }
+    */
     protected boolean validateMove()
     {
         return true;
+    }
+    
+    protected void gameOver(){
+    
     }
 }
