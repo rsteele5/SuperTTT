@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testai;
+package testai2;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,19 +12,21 @@ import java.util.Scanner;
  *
  * @author cnelt
  */
-public class TestAI {
+public class TestAI2 {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) 
             throws IOException {
         AI myAI = new AI();
-        
-        ServerTest server = new ServerTest();
-        ClientTest client = new ClientTest();
-        server.run();
-        client.receive();
+        ServerTest2 server = new ServerTest2();
+        ClientTest2 client = new ClientTest2();
+
+        ServerTest2.run();
+        ClientTest2.receive();
+
        /* String input;
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter player move: ");
