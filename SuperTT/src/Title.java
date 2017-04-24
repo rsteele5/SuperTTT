@@ -1,9 +1,14 @@
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -13,11 +18,15 @@ public class Title extends JFrame {
     private static final JButton sa = new JButton("Stand Alone");
     private static final JButton n = new JButton("Network");
     private static final JButton quit = new JButton("Quit");
+    private static final JButton submit = new JButton("Submit");
     private Container c;
     public static JTextField header;
+    public static JTextField IPvEnter;
+    public static JLabel label;
+    public static String IP;
     
     public Title() {
-        
+      
         c = getContentPane();
         header = new JTextField("Select Game Type");
         header.setEditable(false);
@@ -32,12 +41,23 @@ public class Title extends JFrame {
             buttonPanel.add(n);
             buttonPanel.add(quit);
             c.add(buttonPanel, "Center");
-    
+        
+        JPanel ipgrid = new JPanel();
+            ipgrid.setLayout(new GridLayout(3,1));
+            JLabel label = new JLabel("Enter IP:");
+            IPvEnter = new JTextField();
+            ipgrid.add(label);
+            ipgrid.add(IPvEnter);
+            ipgrid.add(submit);
+            c.add(ipgrid,"South");
+
+   
         Title.ButtonListener listener = new Title.ButtonListener();
         sa.addActionListener(listener);
         n.addActionListener(listener);
         quit.addActionListener(listener);
-    }   
+        submit.addActionListener(listener);
+    }
 
     private static class ButtonListener implements ActionListener {
 
@@ -45,25 +65,30 @@ public class Title extends JFrame {
         
         public void actionPerformed(ActionEvent ae){
             if (ae.getSource() == sa){
-                JFrame frame2 = new Gameboard();
-                frame2.setVisible(true);
-                frame2.setTitle("Standalone Game");
-                frame2.setLocation(400, 100);
-                frame2.setSize(500,500);
-                frame2.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                frame2.setVisible(true);
+                JFrame StandaloneGB = new StandaloneGB();
+                StandaloneGB.setVisible(true);
+                StandaloneGB.setTitle("Standalone Game");
+                StandaloneGB.setLocation(400, 100);
+                StandaloneGB.setSize(500,500);
+                StandaloneGB.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                StandaloneGB.setVisible(true);
             }
-            if (ae.getSource() == n){
-                JFrame frame3 = new Gameboard();
-                frame3.setVisible(true);
-                frame3.setVisible(true);
-                frame3.setTitle("Network Game");
-                frame3.setLocation(400, 100);
-                frame3.setSize(500,500);
-                frame3.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                frame3.setVisible(true);
+            else if (ae.getSource() == n){
+                JFrame NetworkGB = new NetworkGB();
+                NetworkGB.setVisible(true);
+                NetworkGB.setVisible(true);
+                NetworkGB.setTitle("Network Game");
+                NetworkGB.setLocation(400, 100);
+                NetworkGB.setSize(500,500);
+                NetworkGB.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                NetworkGB.setVisible(true);
             }
-            if (ae.getSource() == quit){
+            else if (ae.getSource() == submit){
+                IP = IPvEnter.getText();
+                System.out.println(IP);
+                header.setText("Chosen address is... " + IP);
+            }            
+            else if (ae.getSource() == quit){
                 System.exit(0);
             }
         }
