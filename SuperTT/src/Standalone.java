@@ -18,6 +18,8 @@ public class Standalone extends GameManager
     
     }
     */
+    public int whoGoesFirst(){return 0;}
+    public void playerMove(){}
     protected boolean validateMove()
     {
         return true;
