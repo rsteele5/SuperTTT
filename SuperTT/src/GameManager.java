@@ -14,26 +14,18 @@ public abstract class GameManager
     protected boolean readyToSendMove = false;
     protected int CurrentMove = -1;
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-    protected abstract boolean validateMove();
-    
-    
-    
+    protected abstract boolean validateMove(int position); 
     protected abstract void gameOver();
     public abstract int whoGoesFirst();
-=======
     protected void runGame()
     {
         this.whoGoesFirst();
-=======
+    }
     public void setCurrentMove(int num) {CurrentMove = num;}
->>>>>>> refs/remotes/origin/master
-        
-    public abstract int whoGoesFirst();
     public abstract void playerMove();
+
+   
     //validateMove() will be called inside of move()
-    protected abstract boolean validateMove();
-    protected abstract void gameOver();
->>>>>>> refs/remotes/origin/master
+    
+
 }
