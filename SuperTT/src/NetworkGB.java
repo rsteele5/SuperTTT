@@ -10,81 +10,64 @@ import javax.swing.JTextField;
 
 public class NetworkGB extends JFrame {
 
-    final JButton[] b = new JButton[25];
-    private final JTextField display;
-    private static final JButton quit = new JButton("Quit");
-    private char currentPlayer = 'X';
-    private int unplayedCount = 25;
+final JButton[] b = new JButton[25];
+final char[] cArray = new char[25];
+private final JTextField display;
+private static final JButton quit = new JButton("Quit");
+private char currentPlayer = 'X';
+private int unplayedCount = 25;
 
-    public static char MoveOut;
-    public static char MoveIn;
-    
-    public NetworkGB()
-    {
-	//Create content pane and display
-        //Display is unable to be edited
-        Container cp = getContentPane();
-        //GetAddr.IP is a GLOBAL - Accesses IP from GetAddr class
-	display = new JTextField("This game is connected to " + GetAddr.IP);
-	display.setEditable(false);
+	public NetworkGB()
+	{
+		//Create content pane and display
+                //Display is unable to be edited
+                Container cp = getContentPane();
+		display = new JTextField("Play Tic-Tac-Toe: O's turn!");
+		display.setEditable(false);
 
-        //Set display to north frame
-	Font DisplayFont = new Font("Courier New", 1, 18);
-	display.setFont(DisplayFont);
-	cp.add(display, "North");
+                //Set display to north frame
+		Font DisplayFont = new Font("Courier New", 1, 18);
+		display.setFont(DisplayFont);
+		cp.add(display, "North");
 
-        //New JPanel and grid
-        //Set JPanel to center
-	JPanel panel = new JPanel();
-	panel.setLayout(new GridLayout(5, 5));
-	cp.add(panel, "Center");
+                //New JPanel and grid
+                //Set JPanel to center
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(5, 5));
+		cp.add(panel, "Center");
                 
-        //New JPanel
-        //Set panel to south
-        JPanel quitPanel = new JPanel();
-        quitPanel.add(quit);
-        cp.add(quitPanel,"South");
+                
+                JPanel quitPanel = new JPanel();
+                quitPanel.add(quit);
+                cp.add(quitPanel,"South");
+
 		
-        //Initialize arr of 25 JButtons
-        //create buttons 0-24
-	JButton[] b = new JButton[25];
-	for(int i=0;i<25;i++){
-		b[i] = new JButton("");
-	}
+                //Initialize arr of 25 JButtons
+                //create buttons 0-24
+		JButton[] b = new JButton[25];
+		for(int i=0;i<25;i++){
+			b[i] = new JButton("");
+		}
 
-        //Add JButtons to panel
-	for(int i=0;i<b.length; i++){
-                panel.add(b[i]);
-	}
+                //Add JButtons to panel
+		for(int i=0;i<b.length; i++){
+                    panel.add(b[i]);
+		}
 
-	//Set JButton font and size
-        Font buttonFont = new Font("Courier New", 1, 56);
-            for(int i=0;i<25;i++){
-            b[i].setFont(buttonFont);
-        }
-            
-        //Disable Human Input fo AI v AI
-        for(int i=0;i<b.length;i++){
-            b[i].setEnabled(false);
-        }
+		//Set JButton font and size
+                Font buttonFont = new Font("Courier New", 1, 56);
+		for(int i=0;i<25;i++){
+                    b[i].setFont(buttonFont);
+                }
                 
-        //Add listeners to JButtons
-        /* COMMENTING OUT; WILL NOT BE NEEDED
-        NetworkGB.ButtonListener listener = new NetworkGB.ButtonListener();
-        quit.addActionListener(listener);
-            for(int i=0;i<25;i++){
-            b[i].addActionListener(listener);
-	}
-        */
-    }
-    
-    public void displayMove() {
-        int i = 0;
-        b[i].setText(currentPlayer + "");
-    }
-    
-
-    /* COMMENTING OUT; WILL NOT BE NEEDED   
+                //Add listeners to JButtons
+                NetworkGB.ButtonListener listener = new NetworkGB.ButtonListener();
+                quit.addActionListener(listener);
+		for(int i=0;i<25;i++){
+                    b[i].addActionListener(listener);
+		}
+        }
+        
     private class ButtonListener implements ActionListener {
 
         private ButtonListener() {}
@@ -102,6 +85,15 @@ public class NetworkGB extends JFrame {
                 dispose();
                 quit.setEnabled(true);
             }
+            
+            /*
+            if (GameManger.AiTurn or whatever its called){
+                NetworkGB.this.disableAllButtons();     
+            } else {
+                NetworkGB.this.setNextPlayer();
+            }
+            */
+            
             //If game is done, disable all JButtons
             if (NetworkGB.this.isGameOver()) {
                 NetworkGB.this.disableAllButtons();
@@ -132,14 +124,15 @@ public class NetworkGB extends JFrame {
         char winner = ' ';
         unplayedCount -= 1;
         
+        /*
         if (winner != ' ') {
             display.setText("Game Over Fam " + winner + "Wins");
         }
+        */
         if(unplayedCount ==0)  {
             display.setText("Game Over Fam");
             return true;
         }
         return false;
     }
-    */
 }
