@@ -21,13 +21,14 @@ public class AI {
     
     private final String theirShape = "o";
     private final String myShape = "x";
-    private String mySpot;
+    private int mySpot;
     
-    String makeMove(String recievedSpot){        
-        this.theirSpot = Integer.parseInt(recievedSpot);
-        if("-1".equals(recievedSpot)){//no one has went yet and AI goes first
+    int makeMove(int recievedSpot){        
+//        this.theirSpot = Integer.parseInt(recievedSpot);
+        this.theirSpot = recievedSpot;
+        if(recievedSpot == -1){//no one has went yet and AI goes first
             markedSpots[12] = myShape;
-            mySpot = "12";
+            mySpot = 12;
         }
         else{
             columnCount = 0;
@@ -219,7 +220,8 @@ public class AI {
                 colSpot -= 5;
             else{
                 this.markedSpots[colSpot] = this.myShape;
-                this.mySpot = Integer.toString(colSpot);
+//                this.mySpot = Integer.toString(colSpot);
+                this.mySpot = colSpot;
                 return;
             }
         }
@@ -229,7 +231,8 @@ public class AI {
                 colSpot += 5;
             else{
                 this.markedSpots[colSpot] = this.myShape;
-                this.mySpot = Integer.toString(colSpot);
+//                this.mySpot = Integer.toString(colSpot);
+                this.mySpot = colSpot;
                 return;
             }
         }
@@ -247,7 +250,8 @@ public class AI {
                     rowSpot --;
                 else{
                     this.markedSpots[rowSpot] = this.myShape;
-                    this.mySpot = Integer.toString(rowSpot);
+//                    this.mySpot = Integer.toString(rowSpot);
+                    this.mySpot = rowSpot;
                     return;
                 }
             }
@@ -261,7 +265,8 @@ public class AI {
                     rowSpot ++;
                 else{
                     this.markedSpots[rowSpot] = this.myShape;
-                    this.mySpot = Integer.toString(rowSpot);
+//                    this.mySpot = Integer.toString(rowSpot);
+                    this.mySpot = rowSpot;
                     return;
                 }
             }
@@ -276,7 +281,8 @@ public class AI {
                 diagSpot += 6;
             else{
                 this.markedSpots[diagSpot] = this.myShape;
-                this.mySpot = Integer.toString(diagSpot);
+//                this.mySpot = Integer.toString(diagSpot);
+                this.mySpot = diagSpot;
             }
         }
     }
@@ -289,7 +295,8 @@ public class AI {
                 diagSpot += 4;
             else{
                 this.markedSpots[diagSpot] = this.myShape;
-                this.mySpot = Integer.toString(diagSpot);
+//                this.mySpot = Integer.toString(diagSpot);
+                this.mySpot = diagSpot;
             }
         }
     }
@@ -300,7 +307,8 @@ public class AI {
                 this.rowCount++;
             else{ //mark o and break
                 this.markedSpots[i] = this.myShape;
-                this.mySpot = Integer.toString(i);
+//                this.mySpot = Integer.toString(i);
+                this.mySpot = i;
                 return;
             }            
         }

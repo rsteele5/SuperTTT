@@ -8,20 +8,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Gameboard extends JFrame
-{
+public class NetworkGB extends JFrame {
 
-static JButton[] b = new JButton[25];
+final JButton[] b = new JButton[25];
 final char[] cArray = new char[25];
 private final JTextField display;
 private static final JButton quit = new JButton("Quit");
 private char currentPlayer = 'X';
 private int unplayedCount = 25;
 
-//returns clicked button
-static int clickedButton; 
-
-	public Gameboard()
+	public NetworkGB()
 	{
 		//Create content pane and display
                 //Display is unable to be edited
@@ -65,7 +61,7 @@ static int clickedButton;
                 }
                 
                 //Add listeners to JButtons
-                Gameboard.ButtonListener listener = new Gameboard.ButtonListener();
+                NetworkGB.ButtonListener listener = new NetworkGB.ButtonListener();
                 quit.addActionListener(listener);
 		for(int i=0;i<25;i++){
                     b[i].addActionListener(listener);
@@ -80,19 +76,8 @@ static int clickedButton;
         //Also disable JButton
         public void actionPerformed(ActionEvent ae){
             if(ae.getSource() instanceof JButton){
-<<<<<<< HEAD
-                for(int i = 0; i <= 24; i++){
-                    if(ae.getSource()== b[i]){
-                      clickedButton = i;    
-                      System.out.print("Hello"); 
-                    }
-                }
-                ((JButton)ae.getSource()).setText("" + nextPlayer);
-=======
                 ((JButton)ae.getSource()).setText("" + currentPlayer);
->>>>>>> refs/remotes/origin/master
                 ((JButton)ae.getSource()).setEnabled(false);
-
             }
             
             //if source is quit button, dispose of current JFrame
@@ -101,13 +86,21 @@ static int clickedButton;
                 quit.setEnabled(true);
             }
             
+            /*
+            if (GameManger.AiTurn or whatever its called){
+                NetworkGB.this.disableAllButtons();     
+            } else {
+                NetworkGB.this.setNextPlayer();
+            }
+            */
+            
             //If game is done, disable all JButtons
-            if (Gameboard.this.isGameOver()) {
-                Gameboard.this.disableAllButtons();
+            if (NetworkGB.this.isGameOver()) {
+                NetworkGB.this.disableAllButtons();
             } 
             //If game is not done, call setNextPlayer
             else {
-                Gameboard.this.setNextPlayer();
+                NetworkGB.this.setNextPlayer();
             }
         }
     }
@@ -121,10 +114,11 @@ static int clickedButton;
     
     //Set next player (do AI stuff here?)
     private void setNextPlayer()  {
+        int i=0;
 	currentPlayer = (currentPlayer == 'X' ? 'O' : 'X');
-	display.setText("" + currentPlayer + "'s Turn!");
+	display.setText("Button "+ b[i] + " Pressed! "+"" + currentPlayer + "'s Turn!");
     }
-
+    
     //Is game over?
     private boolean isGameOver()  {
         char winner = ' ';
