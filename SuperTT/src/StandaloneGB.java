@@ -8,8 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Gameboard extends JFrame
-{
+public class StandaloneGB extends JFrame {
 
 final JButton[] b = new JButton[25];
 final char[] cArray = new char[25];
@@ -18,7 +17,7 @@ private static final JButton quit = new JButton("Quit");
 private char currentPlayer = 'X';
 private int unplayedCount = 25;
 
-	public Gameboard()
+	public StandaloneGB()
 	{
 		//Create content pane and display
                 //Display is unable to be edited
@@ -62,7 +61,7 @@ private int unplayedCount = 25;
                 }
                 
                 //Add listeners to JButtons
-                Gameboard.ButtonListener listener = new Gameboard.ButtonListener();
+                StandaloneGB.ButtonListener listener = new StandaloneGB.ButtonListener();
                 quit.addActionListener(listener);
 		for(int i=0;i<25;i++){
                     b[i].addActionListener(listener);
@@ -88,12 +87,12 @@ private int unplayedCount = 25;
             }
             
             //If game is done, disable all JButtons
-            if (Gameboard.this.isGameOver()) {
-                Gameboard.this.disableAllButtons();
+            if (StandaloneGB.this.isGameOver()) {
+                StandaloneGB.this.disableAllButtons();
             } 
             //If game is not done, call setNextPlayer
             else {
-                Gameboard.this.setNextPlayer();
+                StandaloneGB.this.setNextPlayer();
             }
         }
     }
