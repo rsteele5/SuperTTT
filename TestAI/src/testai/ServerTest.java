@@ -15,11 +15,16 @@ package testai;
  import java.net.*;
  import java.io.OutputStreamWriter;
  import java.io.DataInputStream;
+ import java.io.DataOutputStream;
  import java.util.Scanner;
 
  
  public class ServerTest
    {
+     static int recieved;
+     ServerTest(int x){
+         recieved = x;
+     }
      public static void run()
 	 
      throws IOException
@@ -27,8 +32,8 @@ package testai;
          Socket client = null;     // holds the socket for the client
          ServerSocket sock = null; // holds the server socket
          AI myAI = new AI();
-         ClientTest in = new ClientTest();
 
+        // ClientTest in = new ClientTest();
  
 		
          try
@@ -36,73 +41,58 @@ package testai;
              sock = new ServerSocket(5195);    // Port for the server socket
  
              /** loop to listen for connections */
-             while (true)
-               {
+          //   while (true)
+           //    {
                  /** Wait for a client to contact this machine */
                  client = sock.accept( );
                  /** at this point, we have a connection */ 
 				 
  //while gamemanager object not ready for move, set bool to false
  
-                 OutputStreamWriter osw =
-                   new OutputStreamWriter(client.getOutputStream( ));
-                 BufferedWriter bw =
-                   new BufferedWriter(osw);
+//                 OutputStreamWriter osw =
+//                   new OutputStreamWriter(client.getOutputStream( ));
+//                 BufferedWriter bw =
+//                   new BufferedWriter(osw);
+             DataInputStream  dis   = new DataInputStream(client.getInputStream());     // for reading bytes
+
 		 DataOutputStream out = new DataOutputStream(client.getOutputStream());
  
 		 Scanner sc = new Scanner(System.in);
 
                  /** Write the date to the socket */
 				 
-		String input = "testing ";
-		//int number = 5;
-	//	bw.write(test);
 			 int i, j,x;
 			 j = 0;
-		//while(j < 3){
-	//	 System.out.println("Enter a number: ");
-	
-          //       input = sc.next();
+//	myAI.makeMove("12");
+//        out.writeInt(12);
+               //  input = sc.next();
+                 String move = "";
 
-/*  //working keyboad input              
-          while(input != "q")
-                 {
-                    System.out.print("I move to: ");
-                    System.out.println(myAI.makeMove(input));
-                    input = sc.next();
-                    i = Integer.parseInt(input);
-                    out.writeInt(i);
-                 }
-            */     
-  
-  //testing both sides
+                   //   x = in.receive();
+                     
+                  move = Integer.toString(recieved);
+                //  move = Integer.toString(x);
 
+//                 String aiMove = myAI.makeMove(move);
+//
+//		 System.out.println("Received number in server class1 from client2: " + recieved);
+//                    System.out.print("I move to: ");
+//                    System.out.println(aiMove);
+               //     input = sc.next();
+//                    i = Integer.parseInt(in.toString());
 
-                 while(j<25)
-                 {
-	
-            //     input = sc.next();
-                  x = in.receive();
-                 System.out.println("Received number: " + x);
+              //  i = Integer.parseInt(aiMove);
+                    out.writeInt(recieved);
 
-                 String move = Integer.toString(x);
-                    System.out.print("I move to: ");
-                    System.out.println(myAI.makeMove(move));
-            //        input = sc.next();
-                    i = Integer.parseInt(in.toString());
-                    out.writeInt(x);
-                    j++;
-                 }
-                 
-	//		  i = sc.nextInt();
-			// String str = Integer.toString(i);
-	//		   out.writeInt(i);
-				
+               recieved = dis.readInt();
+               
+
+                // bw.close();
  		 out.close();
 
-                 client.close();
+//                 client.close();
                }
-           }
+           //}
          catch (IOException ioe)
            {
              System.err.println(ioe);
@@ -113,6 +103,9 @@ package testai;
              if (sock != null) sock.close();
            }
        }
+
  
    }
+
+
  

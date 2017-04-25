@@ -20,11 +20,25 @@ public class TestAI {
     public static void main(String[] args) 
             throws IOException {
         AI myAI = new AI();
+        int received=12;
+        String move = "";
+        String aiMove;
         
-        ServerTest server = new ServerTest();
-        ClientTest client = new ClientTest();
+        ServerTest server = new ServerTest(received);
+
+              
+      //  ClientTest client = new ClientTest();
+                for(int plays = 0; plays < 12; plays++){
+                    ;
+                     aiMove = myAI.makeMove(Integer.toString(received));
+                     received = Integer.parseInt(aiMove);
+                     server = new ServerTest(received);
+
         server.run();
-        client.receive();
+        //received = client.number;
+
+                }
+       // client.receive();
        /* String input;
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter player move: ");

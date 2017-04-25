@@ -25,7 +25,9 @@ public class NetworkMode extends GameManager
         else{/*Move does not exist*/return false;}
         
     }
-    protected void gameOver(){
-    
+
+    @Override
+    protected void gameOver() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-}
+    }
