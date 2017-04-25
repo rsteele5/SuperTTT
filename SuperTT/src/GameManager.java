@@ -14,14 +14,18 @@ public abstract class GameManager
     protected boolean readyToSendMove = false;
     protected int CurrentMove = -1;
     
+    //validateMove will also be running gameOver()...keeping track of boardsize
     protected abstract boolean validateMove(int position); 
+    
+    //looking for the win condition or draw condition
     protected abstract void gameOver();
     public abstract int whoGoesFirst();
     protected void runGame()
     {
         this.whoGoesFirst();
     }
-    public void setCurrentMove(int num) {CurrentMove = num;}
+    //sets the current variable to the index of the latest move 
+    protected void setCurrentMove(int num) {CurrentMove = num;}
     public abstract void playerMove();
 
    

@@ -80,17 +80,13 @@ static int clickedButton;
         //Also disable JButton
         public void actionPerformed(ActionEvent ae){
             if(ae.getSource() instanceof JButton){
-<<<<<<< HEAD
                 for(int i = 0; i <= 24; i++){
                     if(ae.getSource()== b[i]){
                       clickedButton = i;    
                       System.out.print("Hello"); 
                     }
                 }
-                ((JButton)ae.getSource()).setText("" + nextPlayer);
-=======
                 ((JButton)ae.getSource()).setText("" + currentPlayer);
->>>>>>> refs/remotes/origin/master
                 ((JButton)ae.getSource()).setEnabled(false);
 
             }
