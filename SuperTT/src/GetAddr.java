@@ -55,7 +55,7 @@ public class GetAddr extends JFrame {
                 
                 if (IPvEnter.getText().trim().equals("")){}
                 else {
-                    isServer = false;
+                    isServer = true;
                     JFrame NetworkGB = null;
                     try {
                         NetworkGB = new NetworkGB();

@@ -64,7 +64,6 @@ public class StandaloneGB extends JFrame {
 		
         //Initialize arr of 25 JButtons
         //create buttons 0-24
-//        JButton[] b = new JButton[25];
             for(int i=0;i<25;i++){
                 b[i] = new JButton();
                 b[i].setActionCommand(Integer.toString(i));
@@ -128,19 +127,6 @@ public class StandaloneGB extends JFrame {
                 b[aiMove].setText("" + currentPlayer);              
             }
 
-            
-//            //if source is quit button, dispose of current JFrame
-//            if(ae.getSource() == quit){
-//                dispose();
-//                quit.setEnabled(true);
-//            }
-            
-            //If game is done, disable all JButtons
-//            if (StandaloneGB.this.isGameOver()) {
-//                StandaloneGB.this.disableAllButtons();
-//            } 
-            //If game is not done, call setNextPlayer
-//            else {
                 StandaloneGB.this.setNextPlayer();
 //            }
         }

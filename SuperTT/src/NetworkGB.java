@@ -22,13 +22,6 @@ public class NetworkGB extends JFrame {
     //Create GameManager Object
     NetworkMode saManager = new NetworkMode(); 
     GameManager gm = new NetworkMode();
-    
-    //AI myAI = new AI();
-    
-    
-                
-
-
 
     public NetworkGB() throws IOException, STTT_Exception
     {    
@@ -36,7 +29,7 @@ public class NetworkGB extends JFrame {
         //Display is unable to be edited
         Container cp = getContentPane();
         //GetAddr.IP is a GLOBAL - Accesses IP from GetAddr class
-	display = new JTextField("This game is connected to " + GetAddr.IP);
+	display = new JTextField();
 	display.setEditable(false);
 
         //Set display to north frame
@@ -58,7 +51,7 @@ public class NetworkGB extends JFrame {
 		
         //Initialize arr of 25 JButtons
         //create buttons 0-24
-	JButton[] b = new JButton[25];
+//	JButton[] b = new JButton[25];
 	for(int i=0;i<25;i++){
 		b[i] = new JButton("");
 	}
@@ -91,42 +84,46 @@ public class NetworkGB extends JFrame {
          int ourRand = GameManager.r;
          int send, received;
        
-        if(isClient == true){
+      //client side
+        if(isClient == false){
             Client client = new Client();
             client.send(ourRand);
             int theirRand = client.receive();
-            
+//            System.out.println("Their random number is: " + theirRand);
+
+            display.setText("Our random number: " + ourRand + " and enemy random number: " + theirRand);
             while( ourRand == theirRand){
                Random r = new Random();
                ourRand = r.nextInt(100) + 1;
+//               System.out.println("Our random number is: " + ourRand);
+               
                client.send(ourRand);
                theirRand = client.receive();
+//               System.out.println("Their random number is: " + theirRand);
+               display.setText("Our random number: " + ourRand + " and enemy random number: " + theirRand);
             }
-            if(ourRand > theirRand){//we go first
+            if(ourRand > theirRand){
                 try{
-                    send = gm.playerMove(-99);//we go first so get move to send
+                    send = gm.playerMove(-99);
                     b[send].setText("" + currentPlayer);
                     setNextPlayer();
-                    client.send(send);                                    
+                    client.send(send);
+//                    System.out.println("Move played: " + send);
+
                     while(true){
                         client.receive();
-                        received = client.number;
-                        b[received].setText("" + currentPlayer);//received move is marked
+                        received = client.number;                                               
+//                        System.out.println("Move recieved: " + received);
+                        b[received].setText("" + currentPlayer);
                         setNextPlayer();
-                        //set timer before for here
-                        long timeStart = System.currentTimeMillis();
+                        
+                        
                         send = gm.playerMove(received);
-                        long timeEnd = System.currentTimeMillis();
-                        long timeTaken = timeEnd - timeStart;
-                        //after timer here
+                        client.send(send);
+//                        System.out.println("Move played: " + send);
                         b[send].setText("" + currentPlayer);
                         setNextPlayer();
-                        try{
-                            Thread.sleep(4000-timeTaken);
-                        }catch(InterruptedException e){
-                            e.printStackTrace();
-                        }
-                        client.send(send);
+
                     }
                 }
                 catch(STTT_Exception ex){
@@ -152,29 +149,20 @@ public class NetworkGB extends JFrame {
                      }
                 }       
             }
-           
             
-            else if(ourRand < theirRand){//we go second
+            else if(ourRand < theirRand){
                 try{
                     while(true){            
-                        client.receive();
-                        received = client.number;
-                        b[received].setText("" + currentPlayer);//received move is marked
+                    client.receive();
+                    received = client.number;
+    //                System.out.println("move recieved: " + received);
+                        b[received].setText("" + currentPlayer);
                         setNextPlayer();
-                        long timeStart = System.currentTimeMillis();
-                        send = gm.playerMove(received);
-                        long timeEnd = System.currentTimeMillis();
-                        long timeTaken = timeEnd - timeStart;
-                        
-                        b[send].setText("" + currentPlayer);//received move is marked
+                    send = gm.playerMove(received);
+                    client.send(send);
+                    System.out.println("Move played: " + send);
+                        b[send].setText("" + currentPlayer);
                         setNextPlayer();
-                        //pause game
-                        try{
-                            Thread.sleep(4000-timeTaken);
-                        }catch(InterruptedException e){
-                            e.printStackTrace();
-                        }
-                        client.send(send);
                     }       
                 }
                 catch(STTT_Exception ex){
@@ -190,37 +178,121 @@ public class NetworkGB extends JFrame {
                             break;
                         case 2:
                             System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
+            }
+        }
+        }
+        //serverside
+        if(isServer == false){
+            Server server = new Server();
+            server.send(ourRand);
+            int theirRand = server.receive();
+//            System.out.println("Their random number is: " + theirRand);
+            display.setText("Our random number is: " + ourRand + " and enemy random number is: " + theirRand);
+            
+
+            
+            while(ourRand == theirRand){
+               Random r = new Random();
+               ourRand = r.nextInt(100) + 1;
+               server.send(ourRand);
+               server.send(99);
+//               System.out.println("Our random number is: " + ourRand);
+
+               theirRand = server.receive();
+//               System.out.println("Their random number is: " + theirRand);
+               display.setText("Our random number is: " + ourRand + " and enemy random number is: " + theirRand);
+
+            }
+            if(ourRand > theirRand){
+                try{
+                    send = gm.playerMove(-99);
+                    server.send(send);
+//                    System.out.println("Move played: " + send);
+                        b[send].setText("" + currentPlayer);
+                        setNextPlayer();
+                                    
+                    while(true){
+                        server.receive();
+                        received = server.received;
+//                        System.out.println("move recieved: " + received);
+                        b[received].setText("" + currentPlayer);
+                        setNextPlayer();
+                        
+                        send = gm.playerMove(received);
+                        server.send(send);
+//                        System.out.println("Move played: " + send);
+                        b[send].setText("" + currentPlayer);
+                        setNextPlayer();
+
+                    }
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            server.send(ex.finalMove);
+                            b[ex.finalMove].setText("" + currentPlayer);
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            server.send(ex.finalMove);
+                            b[ex.finalMove].setText("" + currentPlayer);
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            server.send(ex.finalMove);
+                            b[ex.finalMove].setText("" + currentPlayer);
                             break;                     
                      }
-        }
-        }
-        //if bool = true, then Client client = new Client()
-        //int theirRand = client.receive
-        //display = new JTextField("Our Random number is: " + ourRand);
-        //display = new JTextField("Their Random number is: " + theirRand);
-//        Font DisplayFont = new Font("Courier New", 1, 18);
-//	display.setFont(DisplayFont);
-//	cp.add(display, "North");
+            }       
+            }
+           
+            
+            else if(ourRand < theirRand){
+                try{
+                while(true){                                   
+                    server.receive();              
+                    received = server.received;               
+//                    System.out.println("move recieved: " + received);
+                        b[received].setText("" + currentPlayer);
+                        setNextPlayer();
+                        
+                    send = gm.playerMove(received);              
+                    server.send(send);                                                 
+//                    System.out.println("Move played: " + send);
+                        b[send].setText("" + currentPlayer);
+                        setNextPlayer();
 
-        // if ourRand > theirRand, then  send = aiMove(-99); client.send(send)
-        // else client.receive(); receive = client.number; send = aiMove(receive); client.send(send);
+                }       
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
+            }
         
-        //if bool = false, then Server server = new server()
-        //int theirRand = client.receive
-         //display = new JTextField("Our Random number is: " + ourRand);
-        //display = new JTextField("Their Random number is: " + theirRand);
-//        Font DisplayFont = new Font("Courier New", 1, 18);
-//	display.setFont(DisplayFont);
-//	cp.add(display, "North");
-        // if ourRand > theirRand, then  send = aiMove(-99); client.send(send)
-        // else client.receive(); receive = client.receive; send = aiMove(receive); client.send(send);
-        
-               
-   /*     if (GetAddr.IP == null){
-            ifHost();
-        }*/
+        }
+        }        
     }
-    }
+
     private class ButtonListener implements ActionListener {
         private ButtonListener() {}
         
@@ -266,6 +338,6 @@ public class NetworkGB extends JFrame {
     private void setNextPlayer()  {
         int i=0;
 	currentPlayer = (currentPlayer == 'X' ? 'O' : 'X');
-	display.setText("Button "+ b[i] + " Pressed! "+"" + currentPlayer + "'s Turn!");
+//	display.setText("Button "+ b[i] + " Pressed! "+"" + currentPlayer + "'s Turn!");
     }
 }
