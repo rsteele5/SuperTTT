@@ -22,6 +22,7 @@ public class StandaloneGB extends JFrame {
     //Create GameManager Object
     Standalone saManager = new Standalone(); 
     private int aiMove;
+    boolean aiFirst;
     
     public StandaloneGB() throws STTT_Exception	{
         //create new randomNumber for human
@@ -29,10 +30,12 @@ public class StandaloneGB extends JFrame {
         //compare randomNumber with GM
         if(r>GameManager.r){//player goes first
             display = new JTextField("You go first as X!");
+            aiFirst = false;
         }
         else{//AI goes first
             aiMove = saManager.playerMove(-99);
             display = new JTextField("AI went first as X" + " " + aiMove);
+            aiFirst = true;
             //show where AI moved and disable button            
         }
         
@@ -112,8 +115,8 @@ public class StandaloneGB extends JFrame {
                     aiMove = saManager.playerMove(aiMove);
                 } catch (STTT_Exception ex) {
                     switch(ex.result){
-                        case -1: System.out.println("TIE?"); return;
-                        case 0:  display.setText("Tie Game"); disableAllButtons(); return;
+                        case -1: System.out.println("Invalid Move"); return;
+                        case 0:  display.setText("Tie Game"); disableAllButtons(); //if aiFirst(){ex.finalMove set button text} return;
                         case 1: display.setText("The AI Wins!"); disableAllButtons(); return;
                         case 2:  display.setText("Player 2 Wins!"); disableAllButtons(); ; return;
                         default: disableAllButtons(); return;
@@ -133,13 +136,13 @@ public class StandaloneGB extends JFrame {
 //            }
             
             //If game is done, disable all JButtons
-            if (StandaloneGB.this.isGameOver()) {
-                StandaloneGB.this.disableAllButtons();
-            } 
+//            if (StandaloneGB.this.isGameOver()) {
+//                StandaloneGB.this.disableAllButtons();
+//            } 
             //If game is not done, call setNextPlayer
-            else {
+//            else {
                 StandaloneGB.this.setNextPlayer();
-            }
+//            }
         }
     }
     
@@ -156,20 +159,20 @@ public class StandaloneGB extends JFrame {
 	display.setText("You are " + currentPlayer);        
     }
 
-    //Is game over?
-    private boolean isGameOver()  {
-        char winner = ' ';
-        unplayedCount -= 1;
-        
-        /*
-        if (winner != ' ') {
-            display.setText("Game Over Fam " + winner + "Wins");
-        }
-        */
-        if(unplayedCount ==0)  {
-            display.setText("Game Over Fam");
-            return true;
-        }
-        return false;
-    }
+//    //Is game over?
+//    private boolean isGameOver()  {
+//        char winner = ' ';
+//        unplayedCount -= 1;
+//        
+//        /*
+//        if (winner != ' ') {
+//            display.setText("Game Over Fam " + winner + "Wins");
+//        }
+//        */
+//        if(unplayedCount ==0)  {
+//            display.setText("Game Over Fam");
+//            return true;
+//        }
+//        return false;
+//    }
 }
