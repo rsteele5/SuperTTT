@@ -79,7 +79,7 @@ public class StandaloneGB extends JFrame {
         //Also disable JButton
         public void actionPerformed(ActionEvent ae){
             if(ae.getSource() instanceof JButton){
-                ((JButton)ae.getSource()).setText(" " + currentPlayer);
+                ((JButton)ae.getSource()).setText("" + currentPlayer);
                 ((JButton)ae.getSource()).setEnabled(false);
             }
             
