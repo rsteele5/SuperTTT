@@ -89,7 +89,11 @@ public class StandaloneGB extends JFrame {
         //If source is a JButton then set text to current player
         //Also disable JButton
         public void actionPerformed(ActionEvent ae){
+<<<<<<< HEAD
             if(ae.getSource() instanceof JButton){//put text on jbutton
+=======
+            if(ae.getSource() instanceof JButton){
+>>>>>>> 22e9440da72d5990572bf1089c5f9abdccd456d6
                 ((JButton)ae.getSource()).setText("" + currentPlayer);
                 ((JButton)ae.getSource()).setEnabled(false);
                 //call gameManager and send button number
