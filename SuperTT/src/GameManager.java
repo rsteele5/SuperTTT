@@ -17,7 +17,7 @@ public abstract class GameManager
     protected boolean readyToSendMove;
     protected int boardReference [][];
     protected int CurrentMove, currCol, currRow;
-    protected Random rando;
+    public Random rando;
     protected AI ai;
     
     public GameManager()
