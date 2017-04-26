@@ -18,9 +18,12 @@ public class NetworkMode extends GameManager
     
     public int playerMove(int move) throws STTT_Exception
     {
-        this.setCurrentMove(ai.makeMove(move));
-        this.validateMove();
-        return 0;
+        super.setCurrentMove(move);
+        super.validateMove();
+        
+        super.setCurrentMove(ai.makeMove(CurrentMove));
+        super.validateMove();
+        return CurrentMove;
     }
     
     

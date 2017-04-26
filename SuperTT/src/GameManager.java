@@ -15,12 +15,12 @@ public abstract class GameManager
 {
     protected int boardReference [][];
     protected int CurrentPlayer, CurrentMove, currCol, currRow, totalMoves;
-    static public int random;
+    public Random rando;
+    public int r; 
     protected AI ai;
     
     public GameManager()
     {
-        Random rando = new Random();
         boardReference = new int[][] {{0,0,0,0,0},
                                       {0,0,0,0,0},
                                       {0,0,0,0,0},
@@ -33,9 +33,8 @@ public abstract class GameManager
         totalMoves = 0;
         
         ai = new AI();
-        random = rando.nextInt(100) + 1;
-//        rando = new Random();
-//        rando.nextInt(101);
+        rando = new Random();
+        r = rando.nextInt(100) + 1; 
     } 
     
     public abstract int playerMove(int move) throws STTT_Exception;
@@ -85,12 +84,14 @@ public abstract class GameManager
                         if(boardReference[i][4-i] == CurrentPlayer) ++fsLen;
                     }
                     if(hLen == 5 || vLen == 5 || bsLen == 5 || fsLen == 5)
-                    {/*CurrentPlayer wins*/throw new STTT_Exception(CurrentPlayer);}
+                    {throw new STTT_Exception(
+                            "Player " +CurrentPlayer + " is the winner",
+                            CurrentPlayer);}
                 }
                 
                 ++totalMoves;
                 if(totalMoves == 25)
-                {/*Tie Game*/throw new STTT_Exception(0);}
+                {/*Tie Game*/throw new STTT_Exception("Tie Game",0);}
                 
                 //Change Player    
                 if(CurrentPlayer == 1)
@@ -101,6 +102,8 @@ public abstract class GameManager
             else
             {throw new STTT_Exception(CurrentMove + " has already been taken.");}
         }
+        else if(CurrentMove == -99)
+        {/*This is the first turn and the AI is Going first*/}
         else
         {throw new STTT_Exception(CurrentMove + " is out of bounds, fam");}     
     }
