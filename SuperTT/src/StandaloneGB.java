@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,25 +20,28 @@ public class StandaloneGB extends JFrame {
     private char currentPlayer = 'X';
     private int unplayedCount = 25;
     private Random myRando = new Random();
-    
+    int r = myRando.nextInt(100) + 1;
     //Create GameManager Object
     Standalone saManager = new Standalone(); 
+    private int aiMove;
     
-    public StandaloneGB()	{
+    public StandaloneGB() throws STTT_Exception	{
         //create new randomNumber for human
-//        myRando = new Random();
-//        myRando.nextInt(101);
+        
         //compare randomNumber with GM
-        int r = myRando.nextInt(100) + 1;
-        //if(humanRando > gmRando) go first as X
-        //display = new JTextField("You go first as X!");
-        //else AI goes first
-        //display = new JTextField("AI is X");
+        if(r>GameManager.random){//player goes first
+            display = new JTextField("You go first as X!");
+        }
+        else{//AI goes first
+            aiMove = saManager.playerMove(-99);
+            display = new JTextField("AI went first as X" + " " + aiMove);
+            //show where AI moved and disable button            
+        }
         
         //Create content pane and display
         //Display is unable to be edited
         Container cp = getContentPane();
-        display = new JTextField("Play Tic-Tac-Toe: O's turn! " + r);
+//        display = new JTextField("Play Tic-Tac-Toe: O's turn! " + r);
         display.setEditable(false);
 
         //Set display to north frame
@@ -60,7 +65,8 @@ public class StandaloneGB extends JFrame {
         //create buttons 0-24
         JButton[] b = new JButton[25];
             for(int i=0;i<25;i++){
-            b[i] = new JButton("");
+                b[i] = new JButton();
+                b[i].setActionCommand(Integer.toString(i));
         }
 
         //Add JButtons to panel
@@ -80,6 +86,13 @@ public class StandaloneGB extends JFrame {
         for(int i=0;i<25;i++){
             b[i].addActionListener(listener);
         }
+        
+        if(r<GameManager.random){//AI went first so disable button
+            b[aiMove].setEnabled(false);
+            b[aiMove].setText("" + currentPlayer);
+            currentPlayer = 'O';
+        }
+
     }
         
     private class ButtonListener implements ActionListener {
@@ -88,13 +101,34 @@ public class StandaloneGB extends JFrame {
         
         //If source is a JButton then set text to current player
         //Also disable JButton
+        @Override
         public void actionPerformed(ActionEvent ae){
-            if(ae.getSource() instanceof JButton){//put text on jbutton
-                ((JButton)ae.getSource()).setText("" + currentPlayer);
-                ((JButton)ae.getSource()).setEnabled(false);
-                //call gameManager and send button number
-                //write to button that AI marks and disable the button
+            if(ae.getSource() instanceof JButton){
+
+                    ((JButton)ae.getSource()).setText("" + currentPlayer);
+                    ((JButton)ae.getSource()).setEnabled(false);
+                    StandaloneGB.this.setNextPlayer();
+                    aiMove = Integer.parseInt(ae.getActionCommand());
+          
+                try {
+                    aiMove = saManager.playerMove(aiMove);
+                } catch (STTT_Exception ex) {
+                    System.out.println(ex.getMessage());
+                    switch(ex.result){
+                        case -1: break;
+                        case 0: break;
+                        case 1: break;
+                        case 2: break;
+                    }
+                            
+                }
+                
+                    b[aiMove].setEnabled(false);
+                    b[aiMove].setText("" + currentPlayer);
+                    StandaloneGB.this.setNextPlayer();
+                
             }
+
             
             //if source is quit button, dispose of current JFrame
             if(ae.getSource() == quit){

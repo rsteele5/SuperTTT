@@ -15,11 +15,12 @@ public abstract class GameManager
 {
     protected int boardReference [][];
     protected int CurrentPlayer, CurrentMove, currCol, currRow, totalMoves;
-    public Random rando;
+    static public int random;
     protected AI ai;
     
     public GameManager()
     {
+        Random rando = new Random();
         boardReference = new int[][] {{0,0,0,0,0},
                                       {0,0,0,0,0},
                                       {0,0,0,0,0},
@@ -32,8 +33,9 @@ public abstract class GameManager
         totalMoves = 0;
         
         ai = new AI();
-        rando = new Random();
-        rando.nextInt(101);
+        random = rando.nextInt(100) + 1;
+//        rando = new Random();
+//        rando.nextInt(101);
     } 
     
     public abstract int playerMove(int move) throws STTT_Exception;
