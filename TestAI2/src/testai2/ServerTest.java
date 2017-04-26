@@ -1,15 +1,17 @@
-import java.io.*;
+package testai2;
+
+ import java.io.*;
  import java.net.*;
 
- public class Server
+ public class ServerTest
    {
      static int received;
      static int send;
-     static ServerSocket sock; // holds the server socket
-     static Socket client;  // holds the socket for the client
-     Server() throws IOException{
+     static ServerSocket sock;
+     static Socket client;
+     ServerTest() throws IOException{
          try{
-             sock = new ServerSocket(9001);
+             sock = new ServerSocket(5195);
              client = sock.accept();
          }
          catch(IOException ioe){
@@ -17,24 +19,31 @@ import java.io.*;
          }
      }
 
-     public static int receive()
+     public static void receive()
      throws IOException
        {
 //         Socket client = null;     // holds the socket for the client
 //         ServerSocket sock = null; // holds the server socket
          try
            {
-            DataInputStream  in   = new DataInputStream(client.getInputStream());     // for reading integer            
+//            sock = new ServerSocket(5195);    // Port for the server socket
+//            client = sock.accept( );  //new computer we are talking to
+//            DataOutputStream out = new DataOutputStream(client.getOutputStream());
+            DataInputStream  in   = new DataInputStream(client.getInputStream());     // for reading bytes
+//            out.writeInt(send); //sends AI's move to enemy
+//            out.close(); //close the data outstream
+            
             received = in.readInt();//waits here until an integer is read in
-            client.setSoTimeout(10000); //connection times out after 10 seconds
-            return received;
            }
          catch (IOException ioe)
            {
              System.err.println(ioe);
-             System.err.println("Opponent timed out. ");
-             return 999;
            }
+//         finally
+//           {
+//             if (client != null) client.close();
+//             if (sock != null) sock.close();
+//           }
        }
      
      public static void send(int x)
@@ -47,7 +56,7 @@ import java.io.*;
            {
 //            sock = new ServerSocket(5195);    // Port for the server socket
 //            client = sock.accept( );  //new computer we are talking to
-            DataOutputStream out = new DataOutputStream(client.getOutputStream());  //for writings ints
+            DataOutputStream out = new DataOutputStream(client.getOutputStream());
 //            DataInputStream  in   = new DataInputStream(client.getInputStream());     // for reading bytes
             out.writeInt(send); //sends AI's move to enemy
 //            out.close(); //close the data outstream

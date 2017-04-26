@@ -4,7 +4,6 @@ GameManager sends whatever the last move was in string form
 AI goes through the algorithm and returns the spot we want to move to as a string
  */
 package testai;
-
 /**
  * @author cnelt
  */
