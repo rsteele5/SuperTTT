@@ -14,7 +14,7 @@
              System.err.println(ioe);
          }
      }
-     public static void receive()
+     public static int receive()
      throws IOException
        {
 //         String host;          
@@ -26,7 +26,7 @@
 //             sock = new Socket(host, 5195);  // socket for contact with server
 
              DataInputStream  dis   = new DataInputStream(sock.getInputStream());     // for reading ints
-             number = dis.readInt(); //gets integer from talker  
+             return number = dis.readInt(); //gets integer from talker  
 			
             //sock.setSoTimeout(5000);
            

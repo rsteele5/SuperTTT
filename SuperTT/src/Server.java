@@ -17,7 +17,7 @@ import java.io.*;
          }
      }
 
-     public static void receive()
+     public static int receive()
      throws IOException
        {
 //         Socket client = null;     // holds the socket for the client
@@ -31,7 +31,7 @@ import java.io.*;
 //            out.writeInt(send); //sends AI's move to enemy
 //            out.close(); //close the data outstream
             
-            received = in.readInt();//waits here until an integer is read in
+            return received = in.readInt();//waits here until an integer is read in
            }
          catch (IOException ioe)
            {
