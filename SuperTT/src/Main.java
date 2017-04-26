@@ -5,8 +5,9 @@ public class Main
 {
   public static void main(String[] args)
   {
+      
+    // MAIN PROGRAM IS FINISHED
     JFrame frame = new Title();
-    //JFrame frame = new Gameboard();
     frame.setTitle("Super Tic Tac Toe");
     frame.setLocation(400, 100);
     frame.setSize(500,500);
