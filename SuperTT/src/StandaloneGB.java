@@ -116,9 +116,9 @@ public class StandaloneGB extends JFrame {
                 } catch (STTT_Exception ex) {
                     switch(ex.result){
                         case -1: System.out.println("Invalid Move"); return;
-                        case 0:  display.setText("Tie Game"); disableAllButtons(); //if aiFirst(){ex.finalMove set button text} return;
-                        case 1: display.setText("The AI Wins!"); disableAllButtons(); return;
-                        case 2:  display.setText("Player 2 Wins!"); disableAllButtons(); ; return;
+                        case 0:  display.setText("Tie Game"); disableAllButtons();  if(aiFirst){b[ex.finalMove].setText("" + currentPlayer);} return;
+                        case 1: display.setText("The AI Wins!"); disableAllButtons(); if(aiFirst){b[ex.finalMove].setText("" + currentPlayer);}return;
+                        case 2:  display.setText("Player 2 Wins!"); disableAllButtons(); if(aiFirst){b[ex.finalMove].setText("" + currentPlayer);} return;
                         default: disableAllButtons(); return;
                     }
                 }
