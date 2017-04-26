@@ -132,16 +132,33 @@ public class NetworkGB extends JFrame {
                      }
                 }       
             }
+           
             
             else if(ourRand < theirRand){
-                
-                while(true){
-                              
+                try{
+                while(true){            
                 client.receive();
                 received = client.number;
                 send = gm.playerMove(received);
                 client.send(send);
-                }          
+                }       
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
         }
         }
         //if bool = true, then Client client = new Client()
@@ -170,7 +187,7 @@ public class NetworkGB extends JFrame {
             ifHost();
         }*/
     }
-    
+    }
     private class ButtonListener implements ActionListener {
         private ButtonListener() {}
         
