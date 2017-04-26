@@ -10,6 +10,7 @@
  */
 public class NetworkMode extends GameManager
 {
+    public int whoGoesFirst(){return 0;}
     public void playerMove(){}
     protected boolean validateMove()
     {
@@ -24,6 +25,7 @@ public class NetworkMode extends GameManager
             return true;
         }
         else{/*Move does not exist*/return false;}
+        
     }
     protected void gameOver(){
     

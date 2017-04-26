@@ -16,7 +16,8 @@ import java.util.Random;
 public class Standalone extends GameManager
 {
     public Standalone(){
-      //Decide who goes first 
+      //Decide who goes first
+      this.whoGoesFirst(); 
       
       //create an instance of an AI
       //AI myAI = new AI();
@@ -28,6 +29,7 @@ public class Standalone extends GameManager
       */
     }
     
+    @Override
     protected boolean validateMove(int position){
     //if move hasn't been made previously, the move is ok
     
