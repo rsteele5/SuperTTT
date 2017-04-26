@@ -65,7 +65,7 @@ public abstract class GameManager
     //validateMove will also be running gameOver()...keeping track of boardsize
     protected void validateMove() throws STTT_Exception
     {
-        if(CurrentMove >= 0 || CurrentMove <= 24)
+        if(CurrentMove >= 0 && CurrentMove <= 24)
         {    
             if(boardReference[currRow][currCol] == 0)
             {
