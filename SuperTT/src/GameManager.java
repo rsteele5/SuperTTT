@@ -84,12 +84,14 @@ public abstract class GameManager
                         if(boardReference[i][4-i] == CurrentPlayer) ++fsLen;
                     }
                     if(hLen == 5 || vLen == 5 || bsLen == 5 || fsLen == 5)
-                    {/*CurrentPlayer wins*/throw new STTT_Exception(CurrentPlayer);}
+                    {throw new STTT_Exception(
+                            "Player " +CurrentPlayer + " is the winner",
+                            CurrentPlayer);}
                 }
                 
                 ++totalMoves;
                 if(totalMoves == 25)
-                {/*Tie Game*/throw new STTT_Exception(0);}
+                {/*Tie Game*/throw new STTT_Exception("Tie Game",0);}
                 
                 //Change Player    
                 if(CurrentPlayer == 1)
