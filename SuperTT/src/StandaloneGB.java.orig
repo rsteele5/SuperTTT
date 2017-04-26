@@ -4,8 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,28 +18,25 @@ public class StandaloneGB extends JFrame {
     private char currentPlayer = 'X';
     private int unplayedCount = 25;
     private Random myRando = new Random();
-    int r = myRando.nextInt(100) + 1;
+    
     //Create GameManager Object
     Standalone saManager = new Standalone(); 
-    private int aiMove;
     
-    public StandaloneGB() throws STTT_Exception	{
+    public StandaloneGB()	{
         //create new randomNumber for human
-        
+//        myRando = new Random();
+//        myRando.nextInt(101);
         //compare randomNumber with GM
-        if(r>GameManager.r){//player goes first
-            display = new JTextField("You go first as X!");
-        }
-        else{//AI goes first
-            aiMove = saManager.playerMove(-99);
-            display = new JTextField("AI went first as X" + " " + aiMove);
-            //show where AI moved and disable button            
-        }
+        int r = myRando.nextInt(100) + 1;
+        //if(humanRando > gmRando) go first as X
+        //display = new JTextField("You go first as X!");
+        //else AI goes first
+        //display = new JTextField("AI is X");
         
         //Create content pane and display
         //Display is unable to be edited
         Container cp = getContentPane();
-//        display = new JTextField("Play Tic-Tac-Toe: O's turn! " + r);
+        display = new JTextField("Play Tic-Tac-Toe: O's turn! " + r);
         display.setEditable(false);
 
         //Set display to north frame
@@ -63,10 +58,9 @@ public class StandaloneGB extends JFrame {
 		
         //Initialize arr of 25 JButtons
         //create buttons 0-24
-//        JButton[] b = new JButton[25];
+        JButton[] b = new JButton[25];
             for(int i=0;i<25;i++){
-                b[i] = new JButton();
-                b[i].setActionCommand(Integer.toString(i));
+            b[i] = new JButton("");
         }
 
         //Add JButtons to panel
@@ -86,13 +80,6 @@ public class StandaloneGB extends JFrame {
         for(int i=0;i<25;i++){
             b[i].addActionListener(listener);
         }
-        
-        if(r<GameManager.r){//AI went first so disable button
-            b[aiMove].setEnabled(false);
-            b[aiMove].setText("" + currentPlayer);
-            setNextPlayer();
-        }
-
     }
         
     private class ButtonListener implements ActionListener {
@@ -101,26 +88,17 @@ public class StandaloneGB extends JFrame {
         
         //If source is a JButton then set text to current player
         //Also disable JButton
-        @Override
         public void actionPerformed(ActionEvent ae){
+<<<<<<< HEAD
+            if(ae.getSource() instanceof JButton){//put text on jbutton
+=======
             if(ae.getSource() instanceof JButton){
-
-                    ((JButton)ae.getSource()).setText("" + currentPlayer);
-                    ((JButton)ae.getSource()).setEnabled(false);
-                    StandaloneGB.this.setNextPlayer();
-                    aiMove = Integer.parseInt(ae.getActionCommand());
-          
-                try {
-                    aiMove = saManager.playerMove(aiMove);
-                } catch (STTT_Exception ex) {
-                    Logger.getLogger(StandaloneGB.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                System.out.println(aiMove);
-                b[aiMove].setEnabled(false);
-                b[aiMove].setText("" + currentPlayer);              
+>>>>>>> 22e9440da72d5990572bf1089c5f9abdccd456d6
+                ((JButton)ae.getSource()).setText("" + currentPlayer);
+                ((JButton)ae.getSource()).setEnabled(false);
+                //call gameManager and send button number
+                //write to button that AI marks and disable the button
             }
-
             
             //if source is quit button, dispose of current JFrame
             if(ae.getSource() == quit){
@@ -149,7 +127,7 @@ public class StandaloneGB extends JFrame {
     //Set next player (do AI stuff here?)
     private void setNextPlayer()  {
 	currentPlayer = (currentPlayer == 'X' ? 'O' : 'X');
-	display.setText("Your turn as " + currentPlayer);
+	display.setText("" + currentPlayer + "'s Turn!");
         
     }
 
