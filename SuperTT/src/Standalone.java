@@ -14,13 +14,7 @@
 //standalone version enables a person to play against the game AI
 public class Standalone extends GameManager
 {
-<<<<<<< HEAD
-    public Standalone(){
-      super();
-    }
-=======
     public Standalone(){super();}
->>>>>>> origin/master
     
     public int playerMove(int move) throws STTT_Exception {           
         //We set current move with the move the AI has made 
