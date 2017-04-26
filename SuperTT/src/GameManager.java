@@ -86,7 +86,7 @@ public abstract class GameManager
                     if(hLen == 5 || vLen == 5 || bsLen == 5 || fsLen == 5)
                     {throw new STTT_Exception(
                             "Player " +CurrentPlayer + " is the winner",
-                            CurrentPlayer);}
+                            CurrentPlayer, CurrentMove);}
                 }
                 
                 ++totalMoves;
