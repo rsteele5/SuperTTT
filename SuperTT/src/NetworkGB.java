@@ -186,7 +186,7 @@ public class NetworkGB extends JFrame {
         }
         }
         
-        //serverside
+        //serverside k
         if(isServer == false){
             Server server = new Server();
             server.send(ourRand);
