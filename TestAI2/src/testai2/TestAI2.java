@@ -35,7 +35,7 @@ public class TestAI2 {
                     received = server.received; //retrives the number sent from enemy
                 }
             }else{
-                ClientTest client = new ClientTest("10.0.2.15");
+                ClientTest client = new ClientTest("127.0.0.1");
                 for(int plays = 0; plays < 12; plays++){
                     int recieved;
                     client.receive();

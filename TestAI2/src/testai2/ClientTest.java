@@ -30,7 +30,7 @@ package testai2;
              DataInputStream  dis   = new DataInputStream(sock.getInputStream());     // for reading ints
              number = dis.readInt(); //gets integer from talker  
 			
-            //sock.setSoTimeout(5000);
+            sock.setSoTimeout(5000);
            
            }
          catch (IOException ioe)
