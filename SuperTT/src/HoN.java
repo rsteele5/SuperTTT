@@ -3,6 +3,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -19,6 +22,8 @@ public class HoN extends JFrame {
     private static final JButton host = new JButton("i am host");
     private static final JButton nah = new JButton("nah fam");
     private static final JLabel label = new JLabel("Are you host?");
+    public static boolean isClient;
+    
     String temp = "I HATE YOU!!!!!!!";
     private Container c;
 
@@ -33,6 +38,7 @@ public class HoN extends JFrame {
         
         Font labelFont = new Font("Courier New", 1, 18);
         label.setFont(labelFont);
+        
          
         bgrid.add(label);
         bgrid.add(host);
@@ -50,7 +56,13 @@ public class HoN extends JFrame {
         private ButtonListener() {}
         public void actionPerformed(ActionEvent ae){
             if (ae.getSource() == host){
-                JFrame NetworkGB = new NetworkGB();
+                isClient = true;
+                JFrame NetworkGB = null;
+                try {
+                    NetworkGB = new NetworkGB();
+                } catch (Exception ex) {
+                    Logger.getLogger(HoN.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 NetworkGB.setVisible(true);
                 NetworkGB.setTitle("Network Game");
                 NetworkGB.setLocation(400, 100);

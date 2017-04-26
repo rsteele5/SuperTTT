@@ -3,6 +3,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,10 +21,16 @@ public class NetworkGB extends JFrame {
   
     //Create GameManager Object
     NetworkMode saManager = new NetworkMode(); 
-    //GameManager gm = new GameManager();
+    GameManager gm = new NetworkMode();
+    
+    //AI myAI = new AI();
+    
+    
+                
 
 
-    public NetworkGB()
+
+    public NetworkGB() throws IOException, STTT_Exception
     {    
 	//Create content pane and display
         //Display is unable to be edited
@@ -75,9 +83,48 @@ public class NetworkGB extends JFrame {
         NetworkGB.ButtonListener listener = new NetworkGB.ButtonListener();
         quit.addActionListener(listener);
         
-             //int ourRand = gm.rando;
-        //int send, receive;
- 
+        boolean isClient = HoN.isClient;
+        boolean isServer = GetAddr.isServer;
+        System.out.println("is Host set to: " + isClient);
+                System.out.println("is Server is set to: " + isServer);
+
+         int ourRand = GameManager.r;
+         int send, receive;
+       
+        if(isClient == true){
+            Client client = new Client();
+            client.send(ourRand);
+            int theirRand = client.receive();
+            
+            while( ourRand == theirRand){
+               Random r = new Random();
+               ourRand = r.nextInt(100) + 1;
+               client.send(ourRand);
+               theirRand = client.receive();
+            }
+            if(ourRand > theirRand){
+                try{
+                    send = gm.playerMove(-99);
+                                    client.send(send);
+
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            break;
+                        case 0: 
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                     
+                     }
+                }
+                
+               
+            }
+        }
         //if bool = true, then Client client = new Client()
         //int theirRand = client.receive
         //display = new JTextField("Our Random number is: " + ourRand);
@@ -100,9 +147,9 @@ public class NetworkGB extends JFrame {
         // else client.receive(); receive = client.receive; send = aiMove(receive); client.send(send);
         
                
-        if (GetAddr.IP == null){
+   /*     if (GetAddr.IP == null){
             ifHost();
-        }
+        }*/
     }
     
     private class ButtonListener implements ActionListener {

@@ -2,6 +2,9 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -19,6 +22,7 @@ public class GetAddr extends JFrame {
     public static JTextField IPvEnter;
     public static JLabel label;
     public static String IP;
+    public static boolean isServer;
 
     public GetAddr()  {
 
@@ -51,7 +55,13 @@ public class GetAddr extends JFrame {
                 
                 if (IPvEnter.getText().trim().equals("")){}
                 else {
-                    JFrame NetworkGB = new NetworkGB();
+                    isServer = false;
+                    JFrame NetworkGB = null;
+                    try {
+                        NetworkGB = new NetworkGB();
+                    } catch (Exception ex) {
+                        Logger.getLogger(GetAddr.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     NetworkGB.setVisible(true);
                     NetworkGB.setVisible(true);
                     NetworkGB.setTitle("Network Game");
