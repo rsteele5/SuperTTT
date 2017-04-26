@@ -113,7 +113,9 @@ public class NetworkGB extends JFrame {
                         received = client.number;
                         b[received].setText("" + currentPlayer);//received move is marked
                         setNextPlayer();
+                        //set timer before for here
                         send = gm.playerMove(received);
+                        //after timer here
                         b[send].setText("" + currentPlayer);
                         setNextPlayer();
                         client.send(send);
