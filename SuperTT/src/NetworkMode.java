@@ -13,10 +13,19 @@ import java.lang.InterruptedException;
  */
 public class NetworkMode extends GameManager
 {
-    public NetworkMode(){}
+    //Constructor calls base constructor
+    public NetworkMode(){super();}
     
-    public int playerMove(int move)
+    public int playerMove(int move) throws STTT_Exception
     {
+        if(move == -99)
+        {
+            this.setCurrentMove(ai.makeMove(move));
+        }
+        else
+            this.setCurrentMove(move);
+        
+        this.validateMove();
         return 0;
     }
     

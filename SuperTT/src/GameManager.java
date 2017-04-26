@@ -44,7 +44,7 @@ public abstract class GameManager
 //        server.send(rando);
     } 
     
-    public abstract int playerMove(int move);
+    public abstract int playerMove(int move) throws STTT_Exception;
     //sets the current variable to the index of the latest move 
     protected void setCurrentMove(int num) 
     {
@@ -82,7 +82,7 @@ public abstract class GameManager
             {throw new STTT_Exception(CurrentMove + " has already been taken.");}
         }
         else
-        {throw new STTT_Exception(CurrentMove + " is out of bounds");}
+        {throw new STTT_Exception(CurrentMove + " is out of bounds, fam");}
     }
   
     protected void gameOver(){}
