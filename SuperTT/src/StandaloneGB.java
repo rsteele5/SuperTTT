@@ -4,8 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -57,7 +55,7 @@ public class StandaloneGB extends JFrame {
                 
                 
         JPanel quitPanel = new JPanel();
-        quitPanel.add(quit);
+//        quitPanel.add(quit);
         cp.add(quitPanel,"South");
 
 		
@@ -114,11 +112,11 @@ public class StandaloneGB extends JFrame {
                     aiMove = saManager.playerMove(aiMove);
                 } catch (STTT_Exception ex) {
                     switch(ex.result){
-                        case -1: System.out.println("TIE?"); break;
-                        case 0:  display.setText("Tie Game"); disableAllButtons(); break;
-                        case 1: display.setText("The AI Wins!"); disableAllButtons(); break;
-                        case 2:  display.setText("Player 2 Wins!"); disableAllButtons(); break;
-                        default: disableAllButtons(); break;
+                        case -1: System.out.println("TIE?"); return;
+                        case 0:  display.setText("Tie Game"); disableAllButtons(); return;
+                        case 1: display.setText("The AI Wins!"); disableAllButtons(); return;
+                        case 2:  display.setText("Player 2 Wins!"); disableAllButtons(); ; return;
+                        default: disableAllButtons(); return;
                     }
                 }
 
@@ -128,11 +126,11 @@ public class StandaloneGB extends JFrame {
             }
 
             
-            //if source is quit button, dispose of current JFrame
-            if(ae.getSource() == quit){
-                dispose();
-                quit.setEnabled(true);
-            }
+//            //if source is quit button, dispose of current JFrame
+//            if(ae.getSource() == quit){
+//                dispose();
+//                quit.setEnabled(true);
+//            }
             
             //If game is done, disable all JButtons
             if (StandaloneGB.this.isGameOver()) {
