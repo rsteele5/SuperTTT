@@ -27,10 +27,8 @@ public abstract class GameManager
         CurrentMove = -1;
         currCol = 0;
         currRow = 0;
-        this.whoGoesFirst();
     } 
     
-    public abstract int whoGoesFirst();
     protected void playerMove(int move)
     {
         this.setCurrentMove(move);
@@ -61,7 +59,7 @@ public abstract class GameManager
         }
     }
     //validateMove will also be running gameOver()...keeping track of boardsize
-    protected abstract void validateMove();
+    public abstract boolean validateMove();
     protected abstract void gameOver();
     //validateMove() will be called inside of move()
     
