@@ -4,11 +4,12 @@
  public class Client
    {
      static int number;
-     static Socket sock;
+     static Socket sock;   
+     String myIP = GetAddr.IP;
 //     static int send;
-     Client(String host)throws IOException{
+     Client()throws IOException{
          try{
-             sock = new Socket(host, 5195);
+             sock = new Socket(myIP, 5195);
          }
          catch(IOException ioe){
              System.err.println(ioe);

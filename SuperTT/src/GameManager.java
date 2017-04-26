@@ -36,6 +36,12 @@ public abstract class GameManager
         ai = new AI();
         rando = new Random();
         rando.nextInt(101);
+        
+//        jtextfield ("Random number is: " + random);
+//        if (client)
+//        client.send(rando);
+//        else
+//        server.send(rando);
     } 
     
     public abstract int playerMove(int move);
