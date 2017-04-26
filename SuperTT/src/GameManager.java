@@ -10,25 +10,59 @@
  */
 public abstract class GameManager 
 {
-    protected boolean activeGame = true;
-    protected boolean readyToSendMove = false;
-    protected int CurrentMove = -1;
+    protected boolean activeGame;
+    protected boolean readyToSendMove;
+    protected int boardReference [][];
+    protected int CurrentMove, currCol, currRow;
     
-    //validateMove will also be running gameOver()...keeping track of boardsize
-    protected abstract boolean validateMove(int position); 
-    
-    //looking for the win condition or draw condition
-    protected abstract void gameOver();
-    public abstract int whoGoesFirst();
-    protected void runGame()
+    public GameManager()
     {
+        activeGame = true;
+        readyToSendMove = false;
+        boardReference = new int[][] {{0,0,0,0,0},
+                                      {0,0,0,0,0},
+                                      {0,0,0,0,0},
+                                      {0,0,0,0,0},
+                                      {0,0,0,0,0}};
+        CurrentMove = -1;
+        currCol = 0;
+        currRow = 0;
         this.whoGoesFirst();
+    } 
+    
+    public abstract int whoGoesFirst();
+    protected void playerMove(int move)
+    {
+        this.setCurrentMove(move);
+        this.validateMove();
     }
     //sets the current variable to the index of the latest move 
-    protected void setCurrentMove(int num) {CurrentMove = num;}
-    public abstract void playerMove();
-
-   
+    protected void setCurrentMove(int num) 
+    {
+        CurrentMove = num;
+        
+        if(num >= 0 && num <=24)
+        {
+            currCol = 0;
+            currRow = 0;
+            int temp = num;
+            
+            while(temp > 0)
+            {
+                if(currCol < 4)
+                    ++currCol;
+                else
+                {
+                    currCol = 0;
+                    ++currRow;
+                }
+                --temp;
+            }
+        }
+    }
+    //validateMove will also be running gameOver()...keeping track of boardsize
+    protected abstract void validateMove();
+    protected abstract void gameOver();
     //validateMove() will be called inside of move()
     
 
