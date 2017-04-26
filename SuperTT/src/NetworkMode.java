@@ -16,5 +16,4 @@ public class NetworkMode extends GameManager
     {
         return 0;
     }
-    
 }

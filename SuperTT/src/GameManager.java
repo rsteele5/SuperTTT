@@ -78,8 +78,6 @@ public abstract class GameManager
         else
         {throw new STTT_Exception(CurrentMove + " is out of bounds");}
     }
+  
     protected void gameOver(){}
-    //validateMove() will be called inside of move()
-    
-
 }
