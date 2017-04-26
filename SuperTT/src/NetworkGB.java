@@ -121,12 +121,15 @@ public class NetworkGB extends JFrame {
                             break;
                         case 0:
                             System.out.println(ex.getMessage());
+                            client.send(ex.finalMove);
                             break;
                         case 1:
                             System.out.println(ex.getMessage());
+                            client.send(ex.finalMove);
                             break;
                         case 2:
                             System.out.println(ex.getMessage());
+                            client.send(ex.finalMove);
                             break;
                      
                      }
