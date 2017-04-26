@@ -11,12 +11,15 @@ import javax.swing.JTextField;
 public class Gameboard extends JFrame
 {
 
-final JButton[] b = new JButton[25];
+static JButton[] b = new JButton[25];
 final char[] cArray = new char[25];
 private final JTextField display;
 private static final JButton quit = new JButton("Quit");
 private char currentPlayer = 'X';
 private int unplayedCount = 25;
+
+//returns clicked button
+static int clickedButton; 
 
 	public Gameboard()
 	{
@@ -77,8 +80,15 @@ private int unplayedCount = 25;
         //Also disable JButton
         public void actionPerformed(ActionEvent ae){
             if(ae.getSource() instanceof JButton){
+                for(int i = 0; i <= 24; i++){
+                    if(ae.getSource()== b[i]){
+                      clickedButton = i;    
+                      System.out.print("Hello"); 
+                    }
+                }
                 ((JButton)ae.getSource()).setText("" + currentPlayer);
                 ((JButton)ae.getSource()).setEnabled(false);
+
             }
             
             //if source is quit button, dispose of current JFrame

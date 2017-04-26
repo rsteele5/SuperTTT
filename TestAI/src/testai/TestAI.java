@@ -18,14 +18,14 @@ public class TestAI {
      */
     public static void main(String[] args) {
         AI myAI = new AI();
-        String input;
+        int input;
         Scanner keyboard = new Scanner(System.in);
         
-        input = keyboard.next();
-        while(input != "q"){
+        input = keyboard.nextInt();
+        while(input <=24){
             System.out.print("I move to: ");
             System.out.println(myAI.makeMove(input));
-            input = keyboard.next();
+            input = keyboard.nextInt();
         }
     }
     

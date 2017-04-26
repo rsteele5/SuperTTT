@@ -1,3 +1,6 @@
+
+import java.util.concurrent.TimeUnit;
+import java.lang.InterruptedException;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,22 +13,24 @@
  */
 public class NetworkMode extends GameManager
 {
-    protected boolean validateMove()
-    {
-        if((CurrentMove >= 0) && (CurrentMove <= 24))
-        {
-            /*if(Spot is not currently taken)
-            {
-                it is okay to 
-            }
-            else{Can't move there}
-            */
-            return true;
-        }
-        else{/*Move does not exist*/return false;}
-        
-    }
-    protected void gameOver(){
+    //Constructor calls base constructor
+    public NetworkMode(){super();}
     
+    public int playerMove(int move) throws STTT_Exception
+    {
+        if(move == -99)
+        {
+            this.setCurrentMove(ai.makeMove(move));
+        }
+        else
+            this.setCurrentMove(move);
+        
+        this.validateMove();
+        return 0;
+    }
+    
+    
+    protected void waitFam() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5);
     }
 }

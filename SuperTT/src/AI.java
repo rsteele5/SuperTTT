@@ -3,7 +3,7 @@ AI gets called by GameManager who uses the makeMove method
 GameManager sends whatever the last move was in string form
 AI goes through the algorithm and returns the spot we want to move to as a string
  */
-package testai;
+
 
 /**
  * @author cnelt
@@ -26,7 +26,7 @@ public class AI {
     int makeMove(int recievedSpot){        
 //        this.theirSpot = Integer.parseInt(recievedSpot);
         this.theirSpot = recievedSpot;
-        if(recievedSpot == -1){//no one has went yet and AI goes first
+        if(recievedSpot == -99){//no one has went yet and AI goes first
             markedSpots[12] = myShape;
             mySpot = 12;
         }
