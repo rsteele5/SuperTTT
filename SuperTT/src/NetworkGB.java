@@ -95,7 +95,7 @@ public class NetworkGB extends JFrame {
        
     
          //client side
-        if(isClient == true){
+        if(isClient == false){
             Client client = new Client();
             client.send(ourRand);
             int theirRand = client.receive();
@@ -187,7 +187,7 @@ public class NetworkGB extends JFrame {
         }
         
         //serverside
-        if(isServer == true){
+        if(isServer == false){
             Server server = new Server();
             server.send(ourRand);
             int theirRand = server.receive();
