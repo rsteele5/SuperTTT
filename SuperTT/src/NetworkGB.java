@@ -10,16 +10,17 @@ import javax.swing.JTextField;
 
 //GB LOGIC DONE
 public class NetworkGB extends JFrame {
-
+ 
     final JButton[] b = new JButton[25];
-    private final JTextField display;
+    public static JTextField display;
     private static final JButton quit = new JButton("Quit");
     private char currentPlayer = 'X';
     private int unplayedCount = 25;
+  
+    //Create GameManager Object
+    NetworkMode saManager = new NetworkMode(); 
 
-    public static char MoveOut;
-    public static char MoveIn;
-    
+
     public NetworkGB()
     {
 	//Create content pane and display
@@ -52,35 +53,26 @@ public class NetworkGB extends JFrame {
 	for(int i=0;i<25;i++){
 		b[i] = new JButton("");
 	}
+        
+        //Set JButton font and size
+        Font buttonFont = new Font("Courier New", 1, 56);
+            for(int i=0;i<25;i++){
+            b[i].setFont(buttonFont);
+        }
 
         //Add JButtons to panel
 	for(int i=0;i<b.length; i++){
                 panel.add(b[i]);
 	}
-
-	//Set JButton font and size
-        Font buttonFont = new Font("Courier New", 1, 56);
-            for(int i=0;i<25;i++){
-            b[i].setFont(buttonFont);
-        }
-            
+        
         //Disable Human Input fo AI v AI
         for(int i=0;i<b.length;i++){
             b[i].setEnabled(false);
         }
-                
+             
         //Add listeners to JButtons
         NetworkGB.ButtonListener listener = new NetworkGB.ButtonListener();
-            quit.addActionListener(listener);
-            /*
-            for(int i=0;i<25;i++){    
-            b[i].addActionListener(listener);
-            */
-        }
-    
-    public void displayMove() {
-        int i = 0;
-        b[i].setText(currentPlayer + "");
+        quit.addActionListener(listener);
     }
     
     private class ButtonListener implements ActionListener {
@@ -115,11 +107,9 @@ public class NetworkGB extends JFrame {
         }
     }
     
-    //Disable all buttons
-    private void disableAllButtons(){
-        for(int i=0;i<b.length;i++){
-            b[i].setEnabled(false);
-        }
+    public void displayMove() {
+        int i = 0;
+        b[i].setText(currentPlayer + "");
     }
     
     //Set next player (do AI stuff here?)
@@ -127,20 +117,5 @@ public class NetworkGB extends JFrame {
         int i=0;
 	currentPlayer = (currentPlayer == 'X' ? 'O' : 'X');
 	display.setText("Button "+ b[i] + " Pressed! "+"" + currentPlayer + "'s Turn!");
-    }
-    
-    //Is game over?
-    private boolean isGameOver()  {
-        char winner = ' ';
-        unplayedCount -= 1;
-        
-        if (winner != ' ') {
-            display.setText("Game Over Fam " + winner + "Wins");
-        }
-        if(unplayedCount ==0)  {
-            display.setText("Game Over Fam");
-            return true;
-        }
-        return false;
     }
 }
