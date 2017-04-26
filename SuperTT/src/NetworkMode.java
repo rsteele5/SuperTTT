@@ -10,24 +10,10 @@
  */
 public class NetworkMode extends GameManager
 {
-    public int whoGoesFirst(){return 0;}
-    public void playerMove(){}
-    protected boolean validateMove()
-    {
-        if((CurrentMove >= 0) && (CurrentMove <= 24))
-        {
-            /*if(Spot is not currently taken)
-            {
-                it is okay to 
-            }
-            else{Can't move there}
-            */
-            return true;
-        }
-        else{/*Move does not exist*/return false;}
-        
-    }
-    protected void gameOver(){
+    public NetworkMode(){}
     
+    public int playerMove(int move)
+    {
+        return 0;
     }
 }
