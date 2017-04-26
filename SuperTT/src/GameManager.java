@@ -1,3 +1,6 @@
+
+import java.util.Random;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,6 +17,8 @@ public abstract class GameManager
     protected boolean readyToSendMove;
     protected int boardReference [][];
     protected int CurrentMove, currCol, currRow;
+    protected Random rando;
+    protected AI ai;
     
     public GameManager()
     {
@@ -27,15 +32,13 @@ public abstract class GameManager
         CurrentMove = -1;
         currCol = 0;
         currRow = 0;
-        this.whoGoesFirst();
+        
+        ai = new AI();
+        rando = new Random();
+        rando.nextInt(101);
     } 
     
-    public abstract int whoGoesFirst();
-    protected void playerMove(int move)
-    {
-        this.setCurrentMove(move);
-        this.validateMove();
-    }
+    public abstract int playerMove(int move);
     //sets the current variable to the index of the latest move 
     protected void setCurrentMove(int num) 
     {
@@ -61,8 +64,21 @@ public abstract class GameManager
         }
     }
     //validateMove will also be running gameOver()...keeping track of boardsize
-    protected abstract void validateMove();
-    protected abstract void gameOver();
+    protected void validateMove() throws STTT_Exception
+    {
+        if(CurrentMove >= 0 || CurrentMove <= 24)
+        {    
+            if(boardReference[currRow][currCol] == 0)
+            {
+                //Move is Valid
+            }
+            else
+            {throw new STTT_Exception(CurrentMove + " has already been taken.");}
+        }
+        else
+        {throw new STTT_Exception(CurrentMove + " is out of bounds");}
+    }
+    protected void gameOver(){}
     //validateMove() will be called inside of move()
     
 
