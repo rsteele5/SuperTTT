@@ -120,7 +120,7 @@ public class StandaloneGB extends JFrame {
                     }
                 }
 
-                System.out.println(aiMove);
+//                System.out.println(aiMove);
                 b[aiMove].setEnabled(false);
                 b[aiMove].setText("" + currentPlayer);              
             }
