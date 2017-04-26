@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testai2;
+package testai;
 
+import testai.ServerTest2;
 import java.io.IOException;
 
 /**

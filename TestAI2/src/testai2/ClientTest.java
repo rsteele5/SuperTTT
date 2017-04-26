@@ -3,12 +3,12 @@ package testai2;
  import java.io.*;
  import java.net.Socket;
 
- public class ClientTest2
+ public class ClientTest
    {
      static int number;
      static Socket sock;
 //     static int send;
-     ClientTest2(String host)throws IOException{
+     ClientTest(String host)throws IOException{
          try{
              sock = new Socket(host, 5195);
          }

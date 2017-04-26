@@ -3,13 +3,13 @@ package testai2;
  import java.io.*;
  import java.net.*;
 
- public class ServerTest2
+ public class ServerTest
    {
      static int received;
      static int send;
      static ServerSocket sock;
      static Socket client;
-     ServerTest2() throws IOException{
+     ServerTest() throws IOException{
          try{
              sock = new ServerSocket(5195);
              client = sock.accept();

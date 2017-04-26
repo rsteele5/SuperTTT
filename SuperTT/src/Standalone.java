@@ -44,7 +44,6 @@ public class Standalone extends GameManager
         return true; 
     }
     */
-<<<<<<< HEAD
     public int whoGoesFirst(){return 0;}
     public void playerMove(){}
     protected boolean validateMove()
@@ -66,7 +65,6 @@ public class Standalone extends GameManager
         }
     
     
->>>>>>> refs/remotes/origin/master
     }
     
     
