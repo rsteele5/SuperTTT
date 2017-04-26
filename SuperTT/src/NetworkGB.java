@@ -114,10 +114,18 @@ public class NetworkGB extends JFrame {
                         b[received].setText("" + currentPlayer);//received move is marked
                         setNextPlayer();
                         //set timer before for here
+                        long timeStart = System.currentTimeMillis();
                         send = gm.playerMove(received);
+                        long timeEnd = System.currentTimeMillis();
+                        long timeTaken = timeEnd - timeStart;
                         //after timer here
                         b[send].setText("" + currentPlayer);
                         setNextPlayer();
+                        try{
+                            Thread.sleep(4000-timeTaken);
+                        }catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
                         client.send(send);
                     }
                 }
@@ -153,9 +161,19 @@ public class NetworkGB extends JFrame {
                         received = client.number;
                         b[received].setText("" + currentPlayer);//received move is marked
                         setNextPlayer();
+                        long timeStart = System.currentTimeMillis();
                         send = gm.playerMove(received);
+                        long timeEnd = System.currentTimeMillis();
+                        long timeTaken = timeEnd - timeStart;
+                        
                         b[send].setText("" + currentPlayer);//received move is marked
                         setNextPlayer();
+                        //pause game
+                        try{
+                            Thread.sleep(4000-timeTaken);
+                        }catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
                         client.send(send);
                     }       
                 }
