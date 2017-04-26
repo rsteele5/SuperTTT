@@ -61,14 +61,14 @@ public class Title extends JFrame {
             else if (ae.getSource() == n){
                 
                 //if source is network do this
-                //Open GetAddr to get IP
-                JFrame IP = new GetAddr();
-                IP.setVisible(true);
-                IP.setVisible(true);
-                IP.setTitle("IP");
-                IP.setLocation(400, 100);
-                IP.setSize(500,150);
-                IP.setVisible(true);
+                //Go to HOST OR NAH?
+                JFrame HoN = new HoN();
+                HoN.setVisible(true);
+                HoN.setVisible(true);
+                HoN.setTitle("Host or Nah???");
+                HoN.setLocation(400, 200);
+                HoN.setSize(500,150);
+                HoN.setVisible(true);
             }
             else if (ae.getSource() == quit){
                 System.exit(0);

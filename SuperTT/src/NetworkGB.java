@@ -73,6 +73,10 @@ public class NetworkGB extends JFrame {
         //Add listeners to JButtons
         NetworkGB.ButtonListener listener = new NetworkGB.ButtonListener();
         quit.addActionListener(listener);
+               
+        if (GetAddr.IP == null){
+            ifHost();
+        }
     }
     
     private class ButtonListener implements ActionListener {
@@ -105,6 +109,10 @@ public class NetworkGB extends JFrame {
             }
             */
         }
+    }
+    
+    public void ifHost() {
+        display.setText("game is connectecd");
     }
     
     public void displayMove() {
