@@ -16,18 +16,16 @@ public class Standalone extends GameManager
 {
     public Standalone(){super();}
     
-    public int playerMove(int move){           
+    public int playerMove(int move) throws STTT_Exception {           
         //We set current move with the move the AI has made 
         this.setCurrentMove(ai.makeMove(move));
         
-        try{
-            //call super class validateMove() and use exception 
-            //handling for invalid moves caught (outside of 0 and 24)
-            super.validateMove(); 
-        }
-        catch(Exception e){
-            //throw STTT_EXCEPTION("")for invalid move
-        }
+        //call super class validateMove() and use exception 
+        //handling for invalid moves caught (outside of 0 and 24)
+        super.validateMove(); 
+       
+        //
+        
         
         //if there are no invalid moves, sending back valid move from AI
         return CurrentMove; 
