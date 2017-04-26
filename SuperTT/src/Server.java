@@ -9,7 +9,7 @@ import java.io.*;
      static Socket client;  // holds the socket for the client
      Server() throws IOException{
          try{
-             sock = new ServerSocket(5195);
+             sock = new ServerSocket(9001);
              client = sock.accept();
          }
          catch(IOException ioe){

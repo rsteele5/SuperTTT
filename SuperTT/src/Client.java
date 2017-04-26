@@ -9,7 +9,7 @@
 //     static int send;
      Client()throws IOException{
          try{
-             sock = new Socket(myIP, 5195);
+             sock = new Socket(myIP, 9001);
          }
          catch(IOException ioe){
              System.err.println(ioe);

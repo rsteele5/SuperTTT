@@ -86,21 +86,30 @@ public class NetworkGB extends JFrame {
         boolean isClient = HoN.isClient;
         boolean isServer = GetAddr.isServer;
         System.out.println("is Host set to: " + isClient);
-                System.out.println("is Server is set to: " + isServer);
+        System.out.println("is Server is set to: " + isServer);
 
-         int ourRand = GameManager.r;
+         int ourRand =99;//= GameManager.r;
          int send, received;
+         System.out.println("Our random number is: " + ourRand);
+
        
-        if(isClient == true){
+         //client side
+   /*     if(isClient == true){
             Client client = new Client();
             client.send(ourRand);
             int theirRand = client.receive();
+            System.out.println("Their random number is: " + theirRand);
+
             
             while( ourRand == theirRand){
                Random r = new Random();
                ourRand = r.nextInt(100) + 1;
+               System.out.println("Our random number is: " + ourRand);
                client.send(ourRand);
+               
                theirRand = client.receive();
+               System.out.println("Their random number is: " + theirRand);
+
             }
             if(ourRand > theirRand){
                 try{
@@ -109,9 +118,13 @@ public class NetworkGB extends JFrame {
                                     
                     while(true){
                         client.receive();
-                        received = client.number;
+                        received = client.number;                                               
+                        System.out.println("Move recieved: " + received);
+
                         send = gm.playerMove(received);
                         client.send(send);
+                        System.out.println("Move played: " + send);
+
                     }
                 }
                 catch(STTT_Exception ex){
@@ -139,8 +152,12 @@ public class NetworkGB extends JFrame {
                 while(true){            
                 client.receive();
                 received = client.number;
+                System.out.println("move recieved: " + received);
+
                 send = gm.playerMove(received);
                 client.send(send);
+                System.out.println("Move played: " + send);
+
                 }       
                 }
                 catch(STTT_Exception ex){
@@ -161,6 +178,277 @@ public class NetworkGB extends JFrame {
                      }
         }
         }
+        }
+        
+        //serverside
+        if(isServer == true){
+            Server server = new Server();
+            server.send(ourRand);
+            int theirRand = server.receive();
+            System.out.println("Their random number is: " + theirRand);
+
+            
+            while(ourRand == theirRand){
+               Random r = new Random();
+               ourRand = r.nextInt(100) + 1;
+               server.send(ourRand);
+               System.out.println("Our random number is: " + ourRand);
+
+               theirRand = server.receive();
+               System.out.println("Their random number is: " + theirRand);
+
+            }
+            if(ourRand > theirRand){
+                try{
+                    send = gm.playerMove(-99);
+                    server.send(send);
+                                    
+                    while(true){
+                        server.receive();
+                        received = server.received;
+                        System.out.println("move recieved: " + received);
+
+                        send = gm.playerMove(received);
+                        server.send(send);
+                        System.out.println("Move played: " + send);
+
+                    }
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
+                }       
+            }
+           
+            
+            else if(ourRand < theirRand){
+                try{
+                while(true){                                   
+                    server.receive();              
+                    received = server.received;               
+                    System.out.println("move recieved: " + received);
+              
+                    send = gm.playerMove(received);              
+                    server.send(send);                                                 
+                    System.out.println("Move played: " + send);
+
+                }       
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
+        }
+        }
+        }
+        
+    }
+    */
+         //client side
+        if(isClient == false){
+            Client client = new Client();
+            client.send(ourRand);
+            int theirRand = client.receive();
+            System.out.println("Their random number is: " + theirRand);
+
+            
+            while( ourRand == theirRand){
+               Random r = new Random();
+               ourRand = r.nextInt(100) + 1;
+               System.out.println("Our random number is: " + ourRand);
+               client.send(ourRand);
+               
+               theirRand = client.receive();
+               System.out.println("Their random number is: " + theirRand);
+
+            }
+            if(ourRand > theirRand){
+                try{
+                    send = gm.playerMove(-99);
+                    client.send(send);
+                    System.out.println("Move played: " + send);
+
+                                    
+                    while(true){
+                        client.receive();
+                        received = client.number;                                               
+                        System.out.println("Move recieved: " + received);
+
+                        send = gm.playerMove(received);
+                        client.send(send);
+                        System.out.println("Move played: " + send);
+
+                    }
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
+                }       
+            }
+           
+            
+            else if(ourRand < theirRand){
+                try{
+                while(true){            
+                client.receive();
+                received = client.number;
+                System.out.println("move recieved: " + received);
+
+                send = gm.playerMove(received);
+                client.send(send);
+                System.out.println("Move played: " + send);
+
+                }       
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
+        }
+        }
+        }
+        
+        //serverside
+        if(isServer == false){
+            Server server = new Server();
+            server.send(ourRand);
+            int theirRand = server.receive();
+            System.out.println("Their random number is: " + theirRand);
+
+            
+            while(ourRand == theirRand){
+               Random r = new Random();
+               ourRand = r.nextInt(100) + 1;
+               server.send(ourRand);
+               System.out.println("Our random number is: " + ourRand);
+
+               theirRand = server.receive();
+               System.out.println("Their random number is: " + theirRand);
+
+            }
+            if(ourRand > theirRand){
+                try{
+                    send = gm.playerMove(-99);
+                    server.send(send);
+                    System.out.println("Move played: " + send);
+
+                                    
+                    while(true){
+                        server.receive();
+                        received = server.received;
+                        System.out.println("move recieved: " + received);
+
+                        send = gm.playerMove(received);
+                        server.send(send);
+                        System.out.println("Move played: " + send);
+
+                    }
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
+                }       
+            }
+           
+            
+            else if(ourRand < theirRand){
+                try{
+                while(true){                                   
+                    server.receive();              
+                    received = server.received;               
+                    System.out.println("move recieved: " + received);
+              
+                    send = gm.playerMove(received);              
+                    server.send(send);                                                 
+                    System.out.println("Move played: " + send);
+
+                }       
+                }
+                catch(STTT_Exception ex){
+                     switch(ex.result){
+                        case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 0:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 1:
+                            System.out.println(ex.getMessage());
+                            break;
+                        case 2:
+                            System.out.println(ex.getMessage());
+                            break;
+                     
+                     }
+        }
+        }
+        }
+        
+    }
+
         //if bool = true, then Client client = new Client()
         //int theirRand = client.receive
         //display = new JTextField("Our Random number is: " + ourRand);
@@ -186,8 +474,7 @@ public class NetworkGB extends JFrame {
    /*     if (GetAddr.IP == null){
             ifHost();
         }*/
-    }
-    }
+    
     private class ButtonListener implements ActionListener {
         private ButtonListener() {}
         
