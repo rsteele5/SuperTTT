@@ -2,18 +2,10 @@
 /SuperTT/build/
 /SuperTT/dist/
 <<<<<<< HEAD
-<<<<<<< HEAD
 /TestAI/dist/
 /TestAI2/build/
 /TestAI2/dist/
 /TestAI2/nbproject/private/
 =======
 *.properties
->>>>>>> origin/master
-=======
-*.properties
-TestAI/nbproject/private/private.xml
-*.properties
-*.properties
-TestAI/nbproject/private/private.properties
 >>>>>>> origin/master
