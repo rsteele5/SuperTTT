@@ -19,10 +19,11 @@ public class NetworkGB extends JFrame {
   
     //Create GameManager Object
     NetworkMode saManager = new NetworkMode(); 
+    //GameManager gm = new GameManager();
 
 
     public NetworkGB()
-    {
+    {    
 	//Create content pane and display
         //Display is unable to be edited
         Container cp = getContentPane();
@@ -73,6 +74,31 @@ public class NetworkGB extends JFrame {
         //Add listeners to JButtons
         NetworkGB.ButtonListener listener = new NetworkGB.ButtonListener();
         quit.addActionListener(listener);
+        
+             //int ourRand = gm.rando;
+        //int send, receive;
+ 
+        //if bool = true, then Client client = new Client()
+        //int theirRand = client.receive
+        //display = new JTextField("Our Random number is: " + ourRand);
+        //display = new JTextField("Their Random number is: " + theirRand);
+//        Font DisplayFont = new Font("Courier New", 1, 18);
+//	display.setFont(DisplayFont);
+//	cp.add(display, "North");
+
+        // if ourRand > theirRand, then  send = aiMove(-99); client.send(send)
+        // else client.receive(); receive = client.number; send = aiMove(receive); client.send(send);
+        
+        //if bool = false, then Server server = new server()
+        //int theirRand = client.receive
+         //display = new JTextField("Our Random number is: " + ourRand);
+        //display = new JTextField("Their Random number is: " + theirRand);
+//        Font DisplayFont = new Font("Courier New", 1, 18);
+//	display.setFont(DisplayFont);
+//	cp.add(display, "North");
+        // if ourRand > theirRand, then  send = aiMove(-99); client.send(send)
+        // else client.receive(); receive = client.receive; send = aiMove(receive); client.send(send);
+        
                
         if (GetAddr.IP == null){
             ifHost();
