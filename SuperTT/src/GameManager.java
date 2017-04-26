@@ -91,7 +91,7 @@ public abstract class GameManager
                 
                 ++totalMoves;
                 if(totalMoves == 25)
-                {/*Tie Game*/throw new STTT_Exception("Tie Game",0);}
+                {/*Tie Game*/throw new STTT_Exception("Tie Game",0, CurrentMove);}
                 
                 //Change Player    
                 if(CurrentPlayer == 1)
