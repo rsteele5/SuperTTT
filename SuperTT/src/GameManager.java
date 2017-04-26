@@ -13,25 +13,23 @@ import java.util.Random;
  */
 public abstract class GameManager 
 {
-    protected boolean activeGame;
-    protected boolean readyToSendMove;
     protected int boardReference [][];
-    protected int CurrentMove, currCol, currRow;
+    protected int CurrentPlayer, CurrentMove, currCol, currRow, totalMoves;
     public Random rando;
     protected AI ai;
     
     public GameManager()
     {
-        activeGame = true;
-        readyToSendMove = false;
         boardReference = new int[][] {{0,0,0,0,0},
                                       {0,0,0,0,0},
                                       {0,0,0,0,0},
                                       {0,0,0,0,0},
                                       {0,0,0,0,0}};
+        CurrentPlayer = 1;
         CurrentMove = -1;
         currCol = 0;
         currRow = 0;
+        totalMoves = 0;
         
         ai = new AI();
         rando = new Random();
@@ -70,14 +68,38 @@ public abstract class GameManager
         {    
             if(boardReference[currRow][currCol] == 0)
             {
-                //Move is Valid
+                //put move on refernce board
+                boardReference[currRow][currCol] = CurrentPlayer;
+                
+                if(totalMoves >= 9)
+                {
+                    //Check if move ends the game
+                    int hLen = 0, vLen = 0, bsLen = 0, fsLen = 0;
+                    for(int i = 0; i < 5; i++)
+                    {
+                        if(boardReference[i][currCol] == CurrentPlayer) ++vLen;
+                        if(boardReference[currRow][i] == CurrentPlayer) ++hLen;
+                        if(boardReference[i][i] == CurrentPlayer) ++bsLen;
+                        if(boardReference[i][4-i] == CurrentPlayer) ++fsLen;
+                    }
+                    if(hLen == 5 || vLen == 5 || bsLen == 5 || fsLen == 5)
+                    {/*CurrentPlayer wins*/throw new STTT_Exception(CurrentPlayer);}
+                }
+                
+                ++totalMoves;
+                if(totalMoves == 25)
+                {/*Tie Game*/throw new STTT_Exception(0);}
+                
+                //Change Player    
+                if(CurrentPlayer == 1)
+                    ++CurrentPlayer;
+                else
+                    --CurrentPlayer;             
             }
             else
             {throw new STTT_Exception(CurrentMove + " has already been taken.");}
         }
         else
-        {throw new STTT_Exception(CurrentMove + " is out of bounds, fam");}
+        {throw new STTT_Exception(CurrentMove + " is out of bounds, fam");}     
     }
-  
-    protected void gameOver(){}
 }
