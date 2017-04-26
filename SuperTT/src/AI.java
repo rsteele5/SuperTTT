@@ -26,7 +26,7 @@ public class AI {
     int makeMove(int recievedSpot){        
 //        this.theirSpot = Integer.parseInt(recievedSpot);
         this.theirSpot = recievedSpot;
-        if(recievedSpot == -1){//no one has went yet and AI goes first
+        if(recievedSpot == -99){//no one has went yet and AI goes first
             markedSpots[12] = myShape;
             mySpot = 12;
         }

@@ -14,13 +14,7 @@
 //standalone version enables a person to play against the game AI
 public class Standalone extends GameManager
 {
-    public Standalone(){
-      /* while game is active, make move against game AI
-      while (activeGame == true){
-          this.playerMove();
-      }
-      */
-    }
+    public Standalone(){super();}
     
     public int playerMove(int move){           
         //We set current move with the move the AI has made 
