@@ -5,8 +5,8 @@ import java.io.*;
    {
      static int received;
      static int send;
-     static ServerSocket sock;
-     static Socket client;
+     static ServerSocket sock; // holds the server socket
+     static Socket client;  // holds the socket for the client
      Server() throws IOException{
          try{
              sock = new ServerSocket(5195);
@@ -26,12 +26,13 @@ import java.io.*;
            {
             DataInputStream  in   = new DataInputStream(client.getInputStream());     // for reading integer            
             received = in.readInt();//waits here until an integer is read in
-            client.setSoTimeout(5000);
+            client.setSoTimeout(10000); //connection times out after 10 seconds
             return received;
            }
          catch (IOException ioe)
            {
              System.err.println(ioe);
+             System.err.println("Opponent timed out. ");
              return 999;
            }
        }
@@ -46,7 +47,7 @@ import java.io.*;
            {
 //            sock = new ServerSocket(5195);    // Port for the server socket
 //            client = sock.accept( );  //new computer we are talking to
-            DataOutputStream out = new DataOutputStream(client.getOutputStream());
+            DataOutputStream out = new DataOutputStream(client.getOutputStream());  //for writings ints
 //            DataInputStream  in   = new DataInputStream(client.getInputStream());     // for reading bytes
             out.writeInt(send); //sends AI's move to enemy
 //            out.close(); //close the data outstream
