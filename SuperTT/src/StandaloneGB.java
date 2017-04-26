@@ -29,7 +29,7 @@ public class StandaloneGB extends JFrame {
         //create new randomNumber for human
         
         //compare randomNumber with GM
-        if(r>GameManager.random){//player goes first
+        if(r>GameManager.r){//player goes first
             display = new JTextField("You go first as X!");
         }
         else{//AI goes first
@@ -63,7 +63,7 @@ public class StandaloneGB extends JFrame {
 		
         //Initialize arr of 25 JButtons
         //create buttons 0-24
-        JButton[] b = new JButton[25];
+//        JButton[] b = new JButton[25];
             for(int i=0;i<25;i++){
                 b[i] = new JButton();
                 b[i].setActionCommand(Integer.toString(i));
@@ -87,10 +87,10 @@ public class StandaloneGB extends JFrame {
             b[i].addActionListener(listener);
         }
         
-        if(r<GameManager.random){//AI went first so disable button
+        if(r<GameManager.r){//AI went first so disable button
             b[aiMove].setEnabled(false);
             b[aiMove].setText("" + currentPlayer);
-            currentPlayer = 'O';
+            setNextPlayer();
         }
 
     }
@@ -113,20 +113,12 @@ public class StandaloneGB extends JFrame {
                 try {
                     aiMove = saManager.playerMove(aiMove);
                 } catch (STTT_Exception ex) {
-                    System.out.println(ex.getMessage());
-                    switch(ex.result){
-                        case -1: break;
-                        case 0: break;
-                        case 1: break;
-                        case 2: break;
-                    }
-                            
+                    Logger.getLogger(StandaloneGB.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                    b[aiMove].setEnabled(false);
-                    b[aiMove].setText("" + currentPlayer);
-                    StandaloneGB.this.setNextPlayer();
-                
+
+                System.out.println(aiMove);
+                b[aiMove].setEnabled(false);
+                b[aiMove].setText("" + currentPlayer);              
             }
 
             
@@ -157,7 +149,7 @@ public class StandaloneGB extends JFrame {
     //Set next player (do AI stuff here?)
     private void setNextPlayer()  {
 	currentPlayer = (currentPlayer == 'X' ? 'O' : 'X');
-	display.setText("" + currentPlayer + "'s Turn!");
+	display.setText("Your turn as " + currentPlayer);
         
     }
 

@@ -21,6 +21,7 @@ public abstract class GameManager
     
     public GameManager()
     {
+        Random rando = new Random();
         boardReference = new int[][] {{0,0,0,0,0},
                                       {0,0,0,0,0},
                                       {0,0,0,0,0},
@@ -33,6 +34,8 @@ public abstract class GameManager
         totalMoves = 0;
         
         ai = new AI();
+//        rando = new Random();
+//        rando.nextInt(101);
         rando = new Random();
         r = rando.nextInt(100) + 1; 
     } 
@@ -76,7 +79,7 @@ public abstract class GameManager
                 {
                     //Check if move ends the game
                     int hLen = 0, vLen = 0, bsLen = 0, fsLen = 0;
-                    for(int i = 0; i < 5; i++)
+                    for(int i = 0; i <= 4; i++)
                     {
                         if(boardReference[i][currCol] == CurrentPlayer) ++vLen;
                         if(boardReference[currRow][i] == CurrentPlayer) ++hLen;
