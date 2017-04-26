@@ -5,5 +5,3 @@
 /TestAI2/build/
 /TestAI2/dist/
 /TestAI2/nbproject/private/
-*.xml
-*.properties
