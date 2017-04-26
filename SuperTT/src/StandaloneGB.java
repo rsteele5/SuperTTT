@@ -113,7 +113,13 @@ public class StandaloneGB extends JFrame {
                 try {
                     aiMove = saManager.playerMove(aiMove);
                 } catch (STTT_Exception ex) {
-                    Logger.getLogger(StandaloneGB.class.getName()).log(Level.SEVERE, null, ex);
+                    switch(ex.result){
+                        case -1: System.out.println("TIE?"); break;
+                        case 0:  display.setText("Tie Game"); disableAllButtons(); break;
+                        case 1: display.setText("The AI Wins!"); disableAllButtons(); break;
+                        case 2:  display.setText("Player 2 Wins!"); disableAllButtons(); break;
+                        default: disableAllButtons(); break;
+                    }
                 }
 
                 System.out.println(aiMove);
@@ -149,8 +155,7 @@ public class StandaloneGB extends JFrame {
     //Set next player (do AI stuff here?)
     private void setNextPlayer()  {
 	currentPlayer = (currentPlayer == 'X' ? 'O' : 'X');
-	display.setText("Your turn as " + currentPlayer);
-        
+	display.setText("You are " + currentPlayer);        
     }
 
     //Is game over?
