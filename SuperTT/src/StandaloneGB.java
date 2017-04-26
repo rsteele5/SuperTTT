@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,16 +17,26 @@ public class StandaloneGB extends JFrame {
     private static final JButton quit = new JButton("Quit");
     private char currentPlayer = 'X';
     private int unplayedCount = 25;
+    private Random myRando = new Random();
     
     //Create GameManager Object
     Standalone saManager = new Standalone(); 
     
     public StandaloneGB()	{
-      
+        //create new randomNumber for human
+//        myRando = new Random();
+//        myRando.nextInt(101);
+        //compare randomNumber with GM
+        int r = myRando.nextInt(100) + 1;
+        //if(humanRando > gmRando) go first as X
+        //display = new JTextField("You go first as X!");
+        //else AI goes first
+        //display = new JTextField("AI is X");
+        
         //Create content pane and display
         //Display is unable to be edited
         Container cp = getContentPane();
-        display = new JTextField("Play Tic-Tac-Toe: O's turn!");
+        display = new JTextField("Play Tic-Tac-Toe: O's turn! " + r);
         display.setEditable(false);
 
         //Set display to north frame
@@ -78,9 +89,11 @@ public class StandaloneGB extends JFrame {
         //If source is a JButton then set text to current player
         //Also disable JButton
         public void actionPerformed(ActionEvent ae){
-            if(ae.getSource() instanceof JButton){
-                ((JButton)ae.getSource()).setText(" " + currentPlayer);
+            if(ae.getSource() instanceof JButton){//put text on jbutton
+                ((JButton)ae.getSource()).setText("" + currentPlayer);
                 ((JButton)ae.getSource()).setEnabled(false);
+                //call gameManager and send button number
+                //write to button that AI marks and disable the button
             }
             
             //if source is quit button, dispose of current JFrame
