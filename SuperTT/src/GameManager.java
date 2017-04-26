@@ -34,7 +34,6 @@ public abstract class GameManager
         
         ai = new AI();
         rando = new Random();
-        //rando.nextInt(101);
         r = rando.nextInt(100) + 1; 
     } 
     
@@ -101,6 +100,8 @@ public abstract class GameManager
             else
             {throw new STTT_Exception(CurrentMove + " has already been taken.");}
         }
+        else if(CurrentMove == -99)
+        {/*This is the first turn and the AI is Going first*/}
         else
         {throw new STTT_Exception(CurrentMove + " is out of bounds, fam");}     
     }
