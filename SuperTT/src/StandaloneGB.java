@@ -4,8 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -57,7 +55,7 @@ public class StandaloneGB extends JFrame {
                 
                 
         JPanel quitPanel = new JPanel();
-        quitPanel.add(quit);
+//        quitPanel.add(quit);
         cp.add(quitPanel,"South");
 
 		
@@ -113,20 +111,26 @@ public class StandaloneGB extends JFrame {
                 try {
                     aiMove = saManager.playerMove(aiMove);
                 } catch (STTT_Exception ex) {
-                    Logger.getLogger(StandaloneGB.class.getName()).log(Level.SEVERE, null, ex);
+                    switch(ex.result){
+                        case -1: System.out.println("TIE?"); return;
+                        case 0:  display.setText("Tie Game"); disableAllButtons(); return;
+                        case 1: display.setText("The AI Wins!"); disableAllButtons(); return;
+                        case 2:  display.setText("Player 2 Wins!"); disableAllButtons(); ; return;
+                        default: disableAllButtons(); return;
+                    }
                 }
 
-                System.out.println(aiMove);
+//                System.out.println(aiMove);
                 b[aiMove].setEnabled(false);
                 b[aiMove].setText("" + currentPlayer);              
             }
 
             
-            //if source is quit button, dispose of current JFrame
-            if(ae.getSource() == quit){
-                dispose();
-                quit.setEnabled(true);
-            }
+//            //if source is quit button, dispose of current JFrame
+//            if(ae.getSource() == quit){
+//                dispose();
+//                quit.setEnabled(true);
+//            }
             
             //If game is done, disable all JButtons
             if (StandaloneGB.this.isGameOver()) {
@@ -149,8 +153,7 @@ public class StandaloneGB extends JFrame {
     //Set next player (do AI stuff here?)
     private void setNextPlayer()  {
 	currentPlayer = (currentPlayer == 'X' ? 'O' : 'X');
-	display.setText("Your turn as " + currentPlayer);
-        
+	display.setText("You are " + currentPlayer);        
     }
 
     //Is game over?
