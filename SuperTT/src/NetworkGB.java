@@ -85,8 +85,8 @@ public class NetworkGB extends JFrame {
         
         boolean isClient = HoN.isClient;
         boolean isServer = GetAddr.isServer;
-        System.out.println("is Host set to: " + isClient);
-                System.out.println("is Server is set to: " + isServer);
+//        System.out.println("is Host set to: " + isClient);
+//                System.out.println("is Server is set to: " + isServer);
 
          int ourRand = GameManager.r;
          int send, received;
@@ -102,15 +102,20 @@ public class NetworkGB extends JFrame {
                client.send(ourRand);
                theirRand = client.receive();
             }
-            if(ourRand > theirRand){
+            if(ourRand > theirRand){//we go first
                 try{
-                    send = gm.playerMove(-99);
-                    client.send(send);
-                                    
+                    send = gm.playerMove(-99);//we go first so get move to send
+                    b[send].setText("" + currentPlayer);
+                    setNextPlayer();
+                    client.send(send);                                    
                     while(true){
                         client.receive();
                         received = client.number;
+                        b[received].setText("" + currentPlayer);//received move is marked
+                        setNextPlayer();
                         send = gm.playerMove(received);
+                        b[send].setText("" + currentPlayer);
+                        setNextPlayer();
                         client.send(send);
                     }
                 }
@@ -122,29 +127,35 @@ public class NetworkGB extends JFrame {
                         case 0:
                             System.out.println(ex.getMessage());
                             client.send(ex.finalMove);
+                            b[ex.finalMove].setText("" + currentPlayer);
                             break;
                         case 1:
                             System.out.println(ex.getMessage());
                             client.send(ex.finalMove);
+                            b[ex.finalMove].setText("" + currentPlayer);
                             break;
                         case 2:
                             System.out.println(ex.getMessage());
                             client.send(ex.finalMove);
-                            break;
-                     
+                            b[ex.finalMove].setText("" + currentPlayer);
+                            break;                     
                      }
                 }       
             }
            
             
-            else if(ourRand < theirRand){
+            else if(ourRand < theirRand){//we go second
                 try{
-                while(true){            
-                client.receive();
-                received = client.number;
-                send = gm.playerMove(received);
-                client.send(send);
-                }       
+                    while(true){            
+                        client.receive();
+                        received = client.number;
+                        b[received].setText("" + currentPlayer);//received move is marked
+                        setNextPlayer();
+                        send = gm.playerMove(received);
+                        b[send].setText("" + currentPlayer);//received move is marked
+                        setNextPlayer();
+                        client.send(send);
+                    }       
                 }
                 catch(STTT_Exception ex){
                      switch(ex.result){
@@ -159,8 +170,7 @@ public class NetworkGB extends JFrame {
                             break;
                         case 2:
                             System.out.println(ex.getMessage());
-                            break;
-                     
+                            break;                     
                      }
         }
         }
