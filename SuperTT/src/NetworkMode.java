@@ -10,7 +10,9 @@
  */
 public class NetworkMode extends GameManager
 {
-    protected boolean validateMove(int position)
+    public int whoGoesFirst(){return 0;}
+    public void playerMove(){}
+    protected boolean validateMove()
     {
         if((CurrentMove >= 0) && (CurrentMove <= 24))
         {
@@ -27,12 +29,5 @@ public class NetworkMode extends GameManager
     }
     protected void gameOver(){
     
-    }
-    public int whoGoesFirst(){
-         return 1; 
-    }
-    
-    public void playerMove(){
-        
     }
 }

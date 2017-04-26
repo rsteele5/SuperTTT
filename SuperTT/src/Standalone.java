@@ -44,6 +44,13 @@ public class Standalone extends GameManager
         return true; 
     }
     */
+<<<<<<< HEAD
+    public int whoGoesFirst(){return 0;}
+    public void playerMove(){}
+    protected boolean validateMove()
+    {
+        return true;
+=======
     
     if((CurrentMove >= 0) && (CurrentMove <= 24)){
         /*if(Spot is not currently taken){
@@ -59,6 +66,7 @@ public class Standalone extends GameManager
         }
     
     
+>>>>>>> refs/remotes/origin/master
     }
     
     
