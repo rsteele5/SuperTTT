@@ -1,5 +1,4 @@
 
-import java.util.Random;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,12 +15,6 @@ import java.util.Random;
 public class Standalone extends GameManager
 {
     public Standalone(){
-      //Decide who goes first
-      this.whoGoesFirst(); 
-      
-      //create an instance of an AI
-      //AI myAI = new AI();
-    
       /* while game is active, make move against game AI
       while (activeGame == true){
           this.playerMove();
@@ -29,45 +22,24 @@ public class Standalone extends GameManager
       */
     }
     
-    @Override
-    protected boolean validateMove(int position){
-    //if move hasn't been made previously, the move is ok
     
-    //Grab button text from Gameboard. If it's set to either x or o, the move is not valid. If it's not set
-    //the move is valid
-    
-    /*
-    if(Gameboard.b[Gameboard.clickedButton].getText().equals('x') || Gameboard.b[Gameboard.clickedButton].getText().equals('o')){
-        return false; 
-    }
-    else{
-        return true; 
-    }
-    */
-<<<<<<< HEAD
-    public int whoGoesFirst(){return 0;}
-    public void playerMove(){}
-    protected boolean validateMove()
-    {
-        return true;
-=======
-    
-    if((CurrentMove >= 0) && (CurrentMove <= 24)){
-        /*if(Spot is not currently taken){
-                it is okay to 
+    public int playerMove(int move){           
+        //We set current move with the move the AI has made 
+        this.setCurrentMove(ai.makeMove(move));
+        
+        try{
+            //call super class validateMove() and use exception 
+            //handling for invalid moves caught (outside of 0 and 24)
+            super.validateMove(); 
         }
-        else{Can't move there}
-        */
-            return true;
+        catch(Exception e){
+            //throw STTT_EXCEPTION("")for invalid move
         }
-        else{
-        /*Move does not exist*/
-        return false;
-        }
-    
-    
->>>>>>> refs/remotes/origin/master
+        
+        //if there are no invalid moves, sending back valid move from AI
+        return CurrentMove; 
     }
+    
     
     
     @Override
@@ -152,27 +124,4 @@ public class Standalone extends GameManager
     
     }
     
-    @Override
-    public int whoGoesFirst(){
-        //create random number from 0-100
-        int human, AI = 0;
-        Random r = new Random();
-        
-        //assign random numbers to two int variables
-        human = r.nextInt(101);        
-        AI = r.nextInt(101); 
-        
-        //compare the variables and see which one will go first...0 for human and 1 for AI
-        if(human > AI){
-            return 0; 
-        }
-        else{
-            return 1; 
-        }   
-    }
-    
-    @Override
-    public void playerMove(){
-    //player and AI take turns making moves    
-    }
 }
