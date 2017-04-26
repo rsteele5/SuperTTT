@@ -89,7 +89,7 @@ public class NetworkGB extends JFrame {
                 System.out.println("is Server is set to: " + isServer);
 
          int ourRand = GameManager.r;
-         int send, receive;
+         int send, received;
        
         if(isClient == true){
             Client client = new Client();
@@ -105,25 +105,44 @@ public class NetworkGB extends JFrame {
             if(ourRand > theirRand){
                 try{
                     send = gm.playerMove(-99);
-                                    client.send(send);
-
+                    client.send(send);
+                                    
+                    while(true){
+                        client.receive();
+                        received = client.number;
+                        send = gm.playerMove(received);
+                        client.send(send);
+                    }
                 }
                 catch(STTT_Exception ex){
                      switch(ex.result){
                         case -1: //Something has gone wrong
+                            System.out.println(ex.getMessage());
                             break;
-                        case 0: 
+                        case 0:
+                            System.out.println(ex.getMessage());
                             break;
                         case 1:
+                            System.out.println(ex.getMessage());
                             break;
                         case 2:
+                            System.out.println(ex.getMessage());
                             break;
                      
                      }
-                }
-                
-               
+                }       
             }
+            
+            else if(ourRand < theirRand){
+                
+                while(true){
+                              
+                client.receive();
+                received = client.number;
+                send = gm.playerMove(received);
+                client.send(send);
+                }          
+        }
         }
         //if bool = true, then Client client = new Client()
         //int theirRand = client.receive
