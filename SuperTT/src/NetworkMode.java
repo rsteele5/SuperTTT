@@ -1,3 +1,6 @@
+
+import java.util.concurrent.TimeUnit;
+import java.lang.InterruptedException;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,5 +18,10 @@ public class NetworkMode extends GameManager
     public int playerMove(int move)
     {
         return 0;
+    }
+    
+    
+    protected void waitFam() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5);
     }
 }

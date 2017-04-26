@@ -10,15 +10,18 @@ import javax.swing.JTextField;
 
 public class StandaloneGB extends JFrame {
 
-final JButton[] b = new JButton[25];
-final char[] cArray = new char[25];
-private final JTextField display;
-private static final JButton quit = new JButton("Quit");
-private char currentPlayer = 'X';
-private int unplayedCount = 25;
-
+    final JButton[] b = new JButton[25];
+    final char[] cArray = new char[25];
+    private final JTextField display;
+    private static final JButton quit = new JButton("Quit");
+    private char currentPlayer = 'X';
+    private int unplayedCount = 25;
+    
+    //Create GameManager Object
+    Standalone saManager = new Standalone(); 
+    
     public StandaloneGB()	{
-	
+      
         //Create content pane and display
         //Display is unable to be edited
         Container cp = getContentPane();
