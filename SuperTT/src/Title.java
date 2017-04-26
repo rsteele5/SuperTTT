@@ -2,6 +2,8 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -48,15 +50,19 @@ public class Title extends JFrame {
         public void actionPerformed(ActionEvent ae){
             if (ae.getSource() == sa){
                 
-                //If source is Standalone button then do this
-                //Make an SA board
-                JFrame StandaloneGB = new StandaloneGB();
-                StandaloneGB.setVisible(true);
-                StandaloneGB.setTitle("Standalone Game");
-                StandaloneGB.setLocation(400, 100);
-                StandaloneGB.setSize(500,500);
-                StandaloneGB.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                StandaloneGB.setVisible(true);
+                try {
+                    //If source is Standalone button then do this
+                    //Make an SA board
+                    JFrame StandaloneGB = new StandaloneGB();
+                    StandaloneGB.setVisible(true);
+                    StandaloneGB.setTitle("Standalone Game");
+                    StandaloneGB.setLocation(400, 100);
+                    StandaloneGB.setSize(500,500);
+                    StandaloneGB.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                    StandaloneGB.setVisible(true);
+                } catch (STTT_Exception ex) {
+                    Logger.getLogger(Title.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else if (ae.getSource() == n){
                 
