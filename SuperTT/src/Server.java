@@ -25,12 +25,14 @@ import java.io.*;
          try
            {
             DataInputStream  in   = new DataInputStream(client.getInputStream());     // for reading integer            
-            return received = in.readInt();//waits here until an integer is read in
+            received = in.readInt();//waits here until an integer is read in
+            client.setSoTimeout(5000);
+            return received;
            }
          catch (IOException ioe)
            {
              System.err.println(ioe);
-             return 25;
+             return 999;
            }
        }
      

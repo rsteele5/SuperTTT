@@ -20,14 +20,14 @@
          try
            {
              DataInputStream  dis   = new DataInputStream(sock.getInputStream());     // for reading ints
-             return number = dis.readInt(); //gets integer from talker  			
-            //sock.setSoTimeout(5000);
-           
+             number = dis.readInt(); //gets integer from talker  			
+             sock.setSoTimeout(5000);
+             return number;
            }
          catch (IOException ioe)
            {
              System.err.println(ioe);
-             return 25;
+             return 999;
            }    
        }
      public static void send(int aiMove)throws IOException
