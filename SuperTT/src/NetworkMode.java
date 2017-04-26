@@ -10,7 +10,7 @@
  */
 public class NetworkMode extends GameManager
 {
-    protected boolean validateMove()
+    protected boolean validateMove(int position)
     {
         if((CurrentMove >= 0) && (CurrentMove <= 24))
         {
@@ -25,9 +25,14 @@ public class NetworkMode extends GameManager
         else{/*Move does not exist*/return false;}
         
     }
-
-    @Override
-    protected void gameOver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void gameOver(){
+    
     }
+    public int whoGoesFirst(){
+         return 1; 
     }
+    
+    public void playerMove(){
+        
+    }
+}

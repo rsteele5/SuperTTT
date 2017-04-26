@@ -10,25 +10,26 @@
  */
 public abstract class GameManager 
 {
-    boolean activeGame = true;
-    boolean readyToSendMove = false;
-    int CurrentMove = -1;
+    protected boolean activeGame = true;
+    protected boolean readyToSendMove = false;
+    protected int CurrentMove = -1;
     
-    protected abstract boolean validateMove();
-        
+    //validateMove will also be running gameOver()...keeping track of boardsize
+    protected abstract boolean validateMove(int position); 
+    
+    //looking for the win condition or draw condition
+    protected abstract void gameOver();
+    public abstract int whoGoesFirst();
     protected void runGame()
     {
-        /*
-        decide who goes first
-        
-        loop until game is finshed
-        {
-            player move
-            if(move ends the game)
-                gameOver();
-        }
-        */
+        this.whoGoesFirst();
     }
+    //sets the current variable to the index of the latest move 
+    protected void setCurrentMove(int num) {CurrentMove = num;}
+    public abstract void playerMove();
+
+   
+    //validateMove() will be called inside of move()
     
-    protected abstract void gameOver();
+
 }

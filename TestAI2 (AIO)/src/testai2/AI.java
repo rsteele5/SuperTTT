@@ -3,8 +3,7 @@ AI gets called by GameManager who uses the makeMove method
 GameManager sends whatever the last move was in string form
 AI goes through the algorithm and returns the spot we want to move to as a string
  */
-package testai;
-
+package testai2;
 /**
  * @author cnelt
  */
