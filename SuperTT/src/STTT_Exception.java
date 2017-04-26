@@ -18,7 +18,8 @@ public class STTT_Exception extends Exception {
   public int result;
   public STTT_Exception() { super(); result = -1; }
   public STTT_Exception(int r) { super(); result = r; }
-  public STTT_Exception(String message) { super(message); }
-  public STTT_Exception(String message, Throwable cause) { super(message, cause); }
-  public STTT_Exception(Throwable cause) { super(cause); }
+  public STTT_Exception(String message) { super(message); result = -1;}
+  public STTT_Exception(String message, int r) { super(message); result = r;}
+  public STTT_Exception(String message, Throwable cause) { super(message, cause); result = -1;}
+  public STTT_Exception(Throwable cause) { super(cause); result = -1;}
 }
