@@ -89,17 +89,17 @@ public class NetworkGB extends JFrame {
             Client client = new Client();
             client.send(ourRand);
             int theirRand = client.receive();
-//            System.out.println("Their random number is: " + theirRand);
+            System.out.println("Their random number is: " + theirRand);
 
             display.setText("Our random number: " + ourRand + " and enemy random number: " + theirRand);
             while(ourRand == theirRand){
                Random r = new Random();
                ourRand = r.nextInt(100) + 1;
-//               System.out.println("Our random number is: " + ourRand);
+               System.out.println("Our random number is: " + ourRand);
                
                client.send(ourRand);
                theirRand = client.receive();
-//               System.out.println("Their random number is: " + theirRand);
+               System.out.println("Their random number is: " + theirRand);
                display.setText("Our random number: " + ourRand + " and enemy random number: " + theirRand);
             }
             if(ourRand > theirRand){
@@ -109,7 +109,7 @@ public class NetworkGB extends JFrame {
 ////                    cp.isEnabled();
                     setNextPlayer();
                     client.send(send);
-//                    System.out.println("Move played: " + send);
+                    System.out.println("Move played: " + send);
 
                     while(true){
                         client.receive();
@@ -233,7 +233,7 @@ public class NetworkGB extends JFrame {
                     System.out.println("Move played: " + send);
                         b[send].setText("" + currentPlayer);
                         setNextPlayer();
-
+                      
                     while(true){
                         server.receive();
                         received = server.received;                                               
